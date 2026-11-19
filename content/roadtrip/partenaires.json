@@ -1,0 +1,5 @@
+{
+  "_aide": "N'ajouter qu'un partenaire ayant donné son accord écrit. avantage_confirme: true uniquement si l'avantage stagiaire est signé.",
+  "categories": ["restaurant", "activite", "hebergement", "location", "equipement", "loisirs"],
+  "partenaires": []
+}

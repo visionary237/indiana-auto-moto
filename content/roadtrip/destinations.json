@@ -1,0 +1,33 @@
+{
+  "_aide": "Lieux publics et incontournables. Les catégories restaurants, hébergements et partenaires sont alimentées automatiquement par les fichiers partenaires et hébergements validés. Distances approximatives par la route depuis l'école, à vérifier.",
+  "destinations": [
+    { "id": "le-havre", "nom": "Le Havre", "lat": 49.4944, "lng": 0.1079, "distance": "Sur place", "image": null, "texte": "Centre reconstruit par Auguste Perret et classé à l'UNESCO, port, plage de galets et jardins suspendus." },
+    { "id": "etretat", "nom": "Étretat", "lat": 49.7071, "lng": 0.2056, "distance": "≈ 30 km", "image": "/images/roadtrip/etretat-couchant.jpg", "texte": "Les falaises d'Aval et d'Amont, l'Aiguille et la Manneporte, accessibles par les sentiers du littoral." },
+    { "id": "honfleur", "nom": "Honfleur", "lat": 49.419, "lng": 0.233, "distance": "≈ 25 km", "image": "/images/roadtrip/honfleur.jpg", "texte": "Le Vieux Bassin, ses façades étroites et l'église Sainte-Catherine en bois, de l'autre côté du pont de Normandie." },
+    { "id": "deauville", "nom": "Deauville", "lat": 49.36, "lng": 0.075, "distance": "≈ 40 km", "image": "/images/roadtrip/deauville-planches.jpg", "texte": "Les Planches, la grande plage et l'architecture balnéaire de la Côte Fleurie." },
+    { "id": "trouville", "nom": "Trouville-sur-Mer", "lat": 49.3656, "lng": 0.0817, "distance": "≈ 40 km", "image": null, "texte": "Port de pêche, marché aux poissons et villas Belle Époque, face à Deauville." },
+    { "id": "fecamp", "nom": "Fécamp", "lat": 49.7578, "lng": 0.3747, "distance": "≈ 40 km", "image": null, "texte": "Le Palais Bénédictine, l'abbatiale de la Trinité et les plus hautes falaises de la côte." },
+    { "id": "veules", "nom": "Veules-les-Roses", "lat": 49.8711, "lng": 0.8019, "distance": "≈ 90 km", "image": null, "texte": "Village fleuri traversé par la Veules, souvent présentée comme le plus petit fleuve de France." },
+    { "id": "cote-albatre", "nom": "Côte d'Albâtre", "lat": 49.83, "lng": 0.55, "distance": "Du Havre au Tréport", "image": "/images/roadtrip/etretat-aerien.jpg", "texte": "Cent trente kilomètres de falaises de craie blanche, de valleuses et de petites routes côtières." },
+    { "id": "pays-auge", "nom": "Pays d'Auge", "lat": 49.25, "lng": 0.2, "distance": "≈ 45 km", "image": null, "texte": "Bocage, colombages, vergers et petites routes vallonnées entre Pont-l'Évêque et Lisieux." }
+  ],
+  "lieux": [
+    { "nom": "Centre reconstruit par Auguste Perret (UNESCO)", "categorie": "patrimoine", "lat": 49.4925, "lng": 0.1045, "incontournable": true },
+    { "nom": "Église Saint-Joseph", "categorie": "patrimoine", "lat": 49.4893, "lng": 0.0996 },
+    { "nom": "MuMa, musée d'art moderne André Malraux", "categorie": "patrimoine", "lat": 49.4836, "lng": 0.1027 },
+    { "nom": "Église Sainte-Catherine", "categorie": "patrimoine", "lat": 49.4186, "lng": 0.2333 },
+    { "nom": "Palais Bénédictine", "categorie": "patrimoine", "lat": 49.7569, "lng": 0.3794 },
+    { "nom": "Plage du Havre", "categorie": "plage", "lat": 49.4975, "lng": 0.0935 },
+    { "nom": "Plage d'Étretat", "categorie": "plage", "lat": 49.7083, "lng": 0.2028 },
+    { "nom": "Les Planches de Deauville", "categorie": "plage", "lat": 49.3615, "lng": 0.069, "incontournable": true },
+    { "nom": "Plage de Trouville", "categorie": "plage", "lat": 49.3693, "lng": 0.0806 },
+    { "nom": "Plage de Veules-les-Roses", "categorie": "plage", "lat": 49.8761, "lng": 0.8013 },
+    { "nom": "Falaise d'Aval et Manneporte", "categorie": "balade", "lat": 49.703, "lng": 0.188, "incontournable": true },
+    { "nom": "Falaise d'Amont, chapelle Notre-Dame-de-la-Garde", "categorie": "balade", "lat": 49.712, "lng": 0.2125 },
+    { "nom": "Jardins suspendus", "categorie": "balade", "lat": 49.5049, "lng": 0.095 },
+    { "nom": "Cap de la Hève", "categorie": "balade", "lat": 49.5103, "lng": 0.0697 },
+    { "nom": "Pont de Normandie", "categorie": "activite", "lat": 49.4339, "lng": 0.2736, "incontournable": true },
+    { "nom": "Les Bains des Docks", "categorie": "activite", "lat": 49.4855, "lng": 0.13 },
+    { "nom": "Vieux Bassin de Honfleur", "categorie": "patrimoine", "lat": 49.4196, "lng": 0.2325, "incontournable": true }
+  ]
+}

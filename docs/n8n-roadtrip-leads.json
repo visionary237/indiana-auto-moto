@@ -1,0 +1,87 @@
+{
+  "name": "Indiana Road Trip – réception des leads",
+  "nodes": [
+    {
+      "parameters": { "httpMethod": "POST", "path": "roadtrip-lead", "responseMode": "onReceived", "options": { "allowedOrigins": "https://www.indiana-auto-ecole.fr" } },
+      "name": "Webhook site",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [0, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "const b = $input.first().json.body ?? $input.first().json;\nconst email = (b['Email'] || b['E-mail'] || '').trim().toLowerCase();\nreturn [{ json: {\n  kind: b.kind,\n  stage: b['Étape CRM'] || 'Prospect',\n  source: b.Source || 'site',\n  email,\n  nom: b['Nom'] || '',\n  telephone: b['Téléphone'] || '',\n  ville: b['Ville de résidence'] || '',\n  formule: b['Formule proposée'] || '',\n  periode: b['Période de congés'] || b['Période souhaitée'] || '',\n  brochure: b['Accepte la brochure'] === true,\n  raw: JSON.stringify(b),\n  receivedAt: new Date().toISOString()\n} }];"
+      },
+      "name": "Normaliser le lead",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            { "conditions": { "conditions": [{ "leftValue": "={{ $json.kind }}", "rightValue": "alerte sessions", "operator": { "type": "string", "operation": "contains" } }] }, "outputKey": "alerte" },
+            { "conditions": { "conditions": [{ "leftValue": "={{ $json.kind }}", "rightValue": "demande de séjour", "operator": { "type": "string", "operation": "contains" } }] }, "outputKey": "demande" },
+            { "conditions": { "conditions": [{ "leftValue": "={{ $json.kind }}", "rightValue": "partenaire", "operator": { "type": "string", "operation": "contains" } }] }, "outputKey": "partenaire" }
+          ]
+        }
+      },
+      "name": "Type de formulaire",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3,
+      "position": [480, 300]
+    },
+    {
+      "parameters": {
+        "fromEmail": "indiana-autoecole@orange.fr",
+        "toEmail": "={{ $json.email }}",
+        "subject": "Votre demande Indiana Road Trip est bien reçue",
+        "emailFormat": "text",
+        "text": "=Bonjour {{ $json.nom }},\n\nMerci pour votre intérêt pour Indiana Road Trip. Nous revenons vers vous rapidement avec les prochaines sessions et une proposition adaptée.\n\nRappel : la présentation à l'examen dépend de votre niveau, des prérequis et des places attribuées ; l'obtention du permis n'est pas garantie.\n\nL'équipe Indiana Auto-Moto\n02 35 41 27 06"
+      },
+      "name": "E-mail de confirmation",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2,
+      "position": [760, 200]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": { "__rl": true, "mode": "url", "value": "À_RENSEIGNER" },
+        "sheetName": { "__rl": true, "mode": "name", "value": "Leads Road Trip" },
+        "columns": { "mappingMode": "autoMapInputData" }
+      },
+      "name": "CRM provisoire (Google Sheets)",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [760, 400]
+    },
+    {
+      "parameters": {
+        "fromEmail": "indiana-autoecole@orange.fr",
+        "toEmail": "indiana-autoecole@orange.fr",
+        "subject": "=Nouveau lead Road Trip : {{ $json.stage }}",
+        "emailFormat": "text",
+        "text": "={{ $json.nom }} ({{ $json.ville }}), {{ $json.email }} {{ $json.telephone }}\nFormule : {{ $json.formule }}\nPériode : {{ $json.periode }}\n\n{{ $json.raw }}"
+      },
+      "name": "Notifier l'agence",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2,
+      "position": [1000, 400]
+    }
+  ],
+  "connections": {
+    "Webhook site": { "main": [[{ "node": "Normaliser le lead", "type": "main", "index": 0 }]] },
+    "Normaliser le lead": { "main": [[{ "node": "Type de formulaire", "type": "main", "index": 0 }]] },
+    "Type de formulaire": {
+      "main": [
+        [{ "node": "E-mail de confirmation", "type": "main", "index": 0 }, { "node": "CRM provisoire (Google Sheets)", "type": "main", "index": 0 }],
+        [{ "node": "E-mail de confirmation", "type": "main", "index": 0 }, { "node": "CRM provisoire (Google Sheets)", "type": "main", "index": 0 }],
+        [{ "node": "CRM provisoire (Google Sheets)", "type": "main", "index": 0 }]
+      ]
+    },
+    "CRM provisoire (Google Sheets)": { "main": [[{ "node": "Notifier l'agence", "type": "main", "index": 0 }]] }
+  },
+  "settings": { "executionOrder": "v1" }
+}

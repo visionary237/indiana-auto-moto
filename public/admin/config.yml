@@ -1,0 +1,118 @@
+# Decap CMS : édition sans code des contenus Road Trip.
+# GitHub Pages : backend "github". Il faut un petit service OAuth (ex. Cloudflare Worker "decap-proxy")
+# dont l'URL se renseigne dans base_url. Sur Netlify : remplacer par name: git-gateway.
+backend:
+  name: github
+  repo: visionary237/indiana-auto-moto
+  branch: main
+  # base_url: https://votre-oauth-proxy.workers.dev
+locale: fr
+media_folder: public/images/roadtrip
+public_folder: /images/roadtrip
+
+collections:
+  - name: roadtrip
+    label: Indiana Road Trip
+    files:
+      - name: sessions
+        label: Prochaines sessions
+        file: content/roadtrip/sessions.json
+        fields:
+          - { name: _aide, label: Aide, widget: hidden }
+          - name: sessions
+            label: Sessions
+            widget: list
+            fields:
+              - { name: id, label: Identifiant, widget: string }
+              - { name: debut, label: Début, widget: datetime, format: YYYY-MM-DD, time_format: false }
+              - { name: fin, label: Fin, widget: datetime, format: YYYY-MM-DD, time_format: false }
+              - { name: statut, label: Statut, widget: select, options: [en-preparation, ouverte, liste-attente, complet] }
+              - { name: places_total, label: Places au total, widget: number, required: false }
+              - { name: places_restantes, label: Places restantes (chiffre réel uniquement), widget: number, required: false }
+              - { name: prix_a_partir, label: Prix à partir de (€ TTC), widget: number, required: false }
+              - { name: hebergement_id, label: Hébergement (identifiant), widget: string, required: false }
+              - { name: prerequis, label: Prérequis, widget: list, required: false }
+              - { name: date_limite, label: Date limite d'inscription, widget: datetime, format: YYYY-MM-DD, time_format: false, required: false }
+              - { name: examen_info, label: Informations examen, widget: text, required: false }
+      - name: hebergements
+        label: Hébergements
+        file: content/roadtrip/hebergements.json
+        fields:
+          - { name: _aide, label: Aide, widget: hidden }
+          - name: hebergements
+            label: Hébergements
+            widget: list
+            fields:
+              - { name: id, label: Identifiant, widget: string }
+              - { name: nom, label: Nom, widget: string }
+              - { name: valide, label: Contrat signé, widget: boolean, default: false }
+              - { name: photos, label: Photos, widget: list, field: { name: photo, label: Photo, widget: image } }
+              - { name: type_chambre, label: Type de chambre, widget: string }
+              - { name: equipements, label: Équipements, widget: list }
+              - { name: localisation, label: Localisation, widget: string }
+              - { name: distance_ecole, label: Distance de l'école, widget: string }
+              - { name: conditions, label: Conditions du séjour, widget: text }
+              - { name: inclus, label: Inclus, widget: list }
+              - { name: non_inclus, label: Non inclus, widget: list }
+              - { name: options, label: Options, widget: list }
+      - name: partenaires
+        label: Partenaires
+        file: content/roadtrip/partenaires.json
+        fields:
+          - { name: _aide, label: Aide, widget: hidden }
+          - { name: categories, label: Catégories, widget: list }
+          - name: partenaires
+            label: Partenaires
+            widget: list
+            fields:
+              - { name: id, label: Identifiant, widget: string }
+              - { name: nom, label: Nom, widget: string }
+              - { name: categorie, label: Catégorie, widget: select, options: [restaurant, activite, hebergement, location, equipement, loisirs] }
+              - { name: photos, label: Photos, widget: list, field: { name: photo, label: Photo, widget: image } }
+              - { name: description, label: Description, widget: text }
+              - { name: ville, label: Ville, widget: string }
+              - { name: lat, label: Latitude, widget: number, value_type: float, required: false }
+              - { name: lng, label: Longitude, widget: number, value_type: float, required: false }
+              - { name: horaires, label: Horaires, widget: string, required: false }
+              - { name: site, label: Site internet, widget: string, required: false }
+              - { name: avantage, label: Avantage stagiaires, widget: string, required: false }
+              - { name: avantage_confirme, label: Avantage signé, widget: boolean, default: false }
+              - { name: conditions, label: Conditions, widget: text, required: false }
+      - name: programme
+        label: Programme prévisionnel
+        file: content/roadtrip/programme.json
+        fields:
+          - { name: _aide, label: Aide, widget: hidden }
+          - name: jours
+            label: Jours
+            widget: list
+            fields:
+              - { name: jour, label: Jour, widget: number }
+              - { name: jour_semaine, label: Jour de la semaine, widget: string }
+              - { name: titre, label: Titre, widget: string }
+              - { name: formation, label: Formation, widget: text }
+              - { name: decouverte, label: Découverte, widget: text }
+              - { name: type, label: Types, widget: select, multiple: true, options: [arrivee, formation, decouverte, examen, depart] }
+      - name: formules
+        label: Formules et prix
+        file: content/roadtrip/formules.json
+        fields:
+          - { name: _aide, label: Aide, widget: hidden }
+          - { name: hebergement_prix, label: Prix hébergement (vide tant que non signé), widget: number, required: false }
+          - { name: heure_supplementaire, label: Heure supplémentaire (€), widget: number }
+          - name: formules
+            label: Formules
+            widget: list
+            fields:
+              - { name: id, label: Identifiant, widget: string }
+              - { name: nom, label: Nom, widget: string }
+              - { name: pour, label: Pour qui, widget: string }
+              - name: lignes
+                label: Composantes
+                widget: list
+                fields:
+                  - { name: libelle, label: Libellé, widget: string }
+                  - { name: prix, label: Prix (€), widget: number, required: false }
+                  - { name: unite, label: Unité, widget: string, required: false }
+                  - { name: statut, label: Statut, widget: select, options: [inclus, option, a-confirmer, candidat] }
+                  - { name: note, label: Note, widget: string, required: false }

@@ -1,0 +1,19 @@
+{
+  "_aide": "Programme prévisionnel affiché à titre indicatif. Il est ajusté après l'évaluation de départ et selon les dates d'examen attribuées.",
+  "jours": [
+    { "jour": 1, "jour_semaine": "Lundi", "titre": "Arrivée et installation", "formation": "Accueil à l'agence l'après-midi : dossier, livret d'apprentissage, présentation du planning.", "decouverte": "Installation, première balade sur le front de mer du Havre.", "type": ["arrivee"] },
+    { "jour": 2, "jour_semaine": "Mardi", "titre": "Rencontre et évaluation", "formation": "Rencontre avec votre moniteur, évaluation de départ, prise en main de la moto à l'arrêt et à allure lente.", "decouverte": "Soirée libre.", "type": ["formation"] },
+    { "jour": 3, "jour_semaine": "Mercredi", "titre": "Le plateau, allure lente", "formation": "Maniabilité sur piste : équilibre, demi-tour, slalom lent.", "decouverte": "Le centre reconstruit par Auguste Perret, classé à l'UNESCO.", "type": ["formation", "decouverte"] },
+    { "jour": 4, "jour_semaine": "Jeudi", "titre": "Le plateau, avec passager", "formation": "Exercices de maniabilité, révision des fiches de l'interrogation orale.", "decouverte": "Coucher de soleil sur la plage.", "type": ["formation"] },
+    { "jour": 5, "jour_semaine": "Vendredi", "titre": "Le plateau, allure normale", "formation": "Freinage, évitement, trajectoires à allure soutenue.", "decouverte": "Soirée libre.", "type": ["formation"] },
+    { "jour": 6, "jour_semaine": "Samedi", "titre": "Bilan de la première semaine", "formation": "Séance du matin et point d'étape avec le moniteur.", "decouverte": "Après-midi à Étretat : falaises d'Aval et d'Amont.", "type": ["formation", "decouverte"] },
+    { "jour": 7, "jour_semaine": "Dimanche", "titre": "Journée découverte", "formation": "Pas de leçon : l'école est fermée le dimanche.", "decouverte": "Honfleur et le Vieux Bassin, ou les routes du Pays d'Auge.", "type": ["decouverte"] },
+    { "jour": 8, "jour_semaine": "Lundi", "titre": "Première sortie en circulation", "formation": "Conduite en ville, intersections, insertion.", "decouverte": "Soirée libre.", "type": ["formation"] },
+    { "jour": 9, "jour_semaine": "Mardi", "titre": "Rocade et voies rapides", "formation": "Circulation sur voies rapides, anticipation, placement.", "decouverte": "Les jardins suspendus du Havre.", "type": ["formation", "decouverte"] },
+    { "jour": 10, "jour_semaine": "Mercredi", "titre": "Routes de campagne", "formation": "Virages, routes côtières et de campagne, révision du plateau.", "decouverte": "Soirée libre.", "type": ["formation"] },
+    { "jour": 11, "jour_semaine": "Jeudi", "titre": "Préparation à l'examen", "formation": "Vérification du niveau, mise en situation d'examen.", "decouverte": "Soirée calme avant les épreuves.", "type": ["formation", "examen"] },
+    { "jour": 12, "jour_semaine": "Vendredi", "titre": "Épreuves, selon les dates attribuées", "formation": "Présentation à l'épreuve hors circulation si une place est attribuée et si votre niveau est validé.", "decouverte": "Soirée libre.", "type": ["examen"] },
+    { "jour": 13, "jour_semaine": "Samedi", "titre": "Suite des épreuves ou leçon complémentaire", "formation": "Épreuve en circulation selon le calendrier, sinon leçon de consolidation.", "decouverte": "Deauville et Trouville, les planches et le port.", "type": ["examen", "decouverte"] },
+    { "jour": 14, "jour_semaine": "Dimanche", "titre": "Fin du séjour", "formation": "Bilan écrit et, si besoin, plan de suite pour une présentation ultérieure.", "decouverte": "Départ.", "type": ["depart"] }
+  ]
+}

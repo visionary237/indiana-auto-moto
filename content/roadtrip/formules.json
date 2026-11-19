@@ -1,0 +1,39 @@
+{
+  "_aide": "Prix TTC issus des tarifs Indiana. hebergement_prix : null tant que le contrat n'est pas signé.",
+  "hebergement_prix": null,
+  "heure_supplementaire": 60,
+  "formules": [
+    {
+      "id": "code-obtenu",
+      "nom": "Road Trip, code moto obtenu",
+      "pour": "Vous avez déjà réussi l'examen théorique moto (ETM).",
+      "lignes": [
+        { "libelle": "Formation permis A2 : 20 h de conduite, frais de dossier, livret, évaluation", "prix": 790, "statut": "inclus" },
+        { "libelle": "Accompagnement aux épreuves plateau et circulation", "prix": 0, "statut": "inclus", "note": "Compris dans le forfait A2" },
+        { "libelle": "Hébergement 13 nuits", "prix": null, "statut": "inclus", "note": "Tarif communiqué à l'ouverture des sessions" },
+        { "libelle": "Accueil, planning personnalisé, guide de séjour", "prix": 0, "statut": "inclus" },
+        { "libelle": "Heures de conduite supplémentaires", "prix": 60, "unite": "l'heure", "statut": "option" },
+        { "libelle": "Prêt d'équipement (casque, gants)", "prix": null, "statut": "a-confirmer" },
+        { "libelle": "Transport aller-retour jusqu'au Havre", "prix": null, "statut": "candidat" },
+        { "libelle": "Repas, sorties et activités touristiques", "prix": null, "statut": "candidat" }
+      ]
+    },
+    {
+      "id": "code-a-preparer",
+      "nom": "Road Trip, code moto à préparer",
+      "pour": "Vous devez encore réussir l'examen théorique moto (ETM) : il se prépare en ligne avant le séjour.",
+      "lignes": [
+        { "libelle": "Formation code moto en ligne, suivie par l'école", "prix": 40, "statut": "inclus" },
+        { "libelle": "Redevance de l'examen du code (prestataire agréé)", "prix": 30, "statut": "inclus", "note": "Examen à passer avant l'arrivée, dans un centre près de chez vous" },
+        { "libelle": "Formation permis A2 : 20 h de conduite, frais de dossier, livret, évaluation", "prix": 790, "statut": "inclus" },
+        { "libelle": "Accompagnement aux épreuves plateau et circulation", "prix": 0, "statut": "inclus", "note": "Compris dans le forfait A2" },
+        { "libelle": "Hébergement 13 nuits", "prix": null, "statut": "inclus", "note": "Tarif communiqué à l'ouverture des sessions" },
+        { "libelle": "Accueil, planning personnalisé, guide de séjour", "prix": 0, "statut": "inclus" },
+        { "libelle": "Heures de conduite supplémentaires", "prix": 60, "unite": "l'heure", "statut": "option" },
+        { "libelle": "Prêt d'équipement (casque, gants)", "prix": null, "statut": "a-confirmer" },
+        { "libelle": "Transport aller-retour jusqu'au Havre", "prix": null, "statut": "candidat" },
+        { "libelle": "Repas, sorties et activités touristiques", "prix": null, "statut": "candidat" }
+      ]
+    }
+  ]
+}

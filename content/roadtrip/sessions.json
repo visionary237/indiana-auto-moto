@@ -1,0 +1,4 @@
+{
+  "_aide": "Ajouter une session uniquement lorsque les dates, l'hébergement et les moniteurs sont confirmés. statut : en-preparation | ouverte | liste-attente | complet. Ne renseigner places_restantes que si le chiffre est réel.",
+  "sessions": []
+}
