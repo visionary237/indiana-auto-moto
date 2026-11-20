@@ -42,7 +42,6 @@ export default function DrivingEscape() {
             <Image src={asset("/images/lecon-auto.jpg")} alt="Une élève conduit, accompagnée de son enseignant" fill priority sizes="(min-width:1024px) 45vw, 100vw" className="object-cover" />
           </div>
         </Container>
-        <div className="lane text-marquage/40" aria-hidden="true" />
       </section>
 
       <section className="py-20">

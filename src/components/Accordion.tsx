@@ -13,7 +13,7 @@ export function Accordion({ items }: { items: { q: string; a: string }[] }) {
           <div key={it.q}>
             <h3>
               <button
-                className="flex w-full items-center justify-between gap-6 py-5 text-left font-display text-[1.6rem] font-bold hover:text-rouge"
+                className="flex min-h-[56px] w-full items-center justify-between gap-6 py-5 text-left text-lg font-semibold hover:text-rouge md:text-xl"
                 aria-expanded={isOpen}
                 onClick={() => setOpen(isOpen ? null : i)}
               >

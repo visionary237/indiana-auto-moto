@@ -19,7 +19,7 @@ export function PageHero({
     <section className={manche ? "bg-manche text-marquage" : "bg-beton"}>
       <Container className="grid items-center gap-10 py-14 md:py-20 lg:grid-cols-[1.1fr_1fr]">
         <div>
-          <h1 className="text-[clamp(2.8rem,6vw,5.2rem)]">{title}</h1>
+          <h1 className="text-[clamp(2.3rem,5vw,4.2rem)]">{title}</h1>
           <p className={`measure mt-5 text-lg md:text-xl ${manche ? "text-marquage/85" : "text-asphalt/80"}`}>{intro}</p>
           {children && <div className="mt-8 flex flex-wrap gap-3">{children}</div>}
         </div>
@@ -36,7 +36,7 @@ export function PageHero({
 export function SectionTitle({ title, intro, light = false }: { title: string; intro?: string; light?: boolean }) {
   return (
     <div className="mb-10 max-w-3xl">
-      <h2 className="text-[clamp(2.1rem,4vw,3.4rem)]">{title}</h2>
+      <h2 className="text-[clamp(1.9rem,3.6vw,2.9rem)]">{title}</h2>
       {intro && <p className={`measure mt-4 text-lg ${light ? "text-marquage/80" : "text-asphalt/75"}`}>{intro}</p>}
     </div>
   );
@@ -45,11 +45,11 @@ export function SectionTitle({ title, intro, light = false }: { title: string; i
 /** Carte tarif façon panneau : le prix est l'information principale. */
 export function PackCard({ pack, featured = false }: { pack: Pack; featured?: boolean }) {
   return (
-    <article className={`flex flex-col rounded-md border-2 p-6 ${featured ? "border-asphalt bg-asphalt text-marquage" : "border-beton bg-white"}`}>
-      <h3 className="text-[1.75rem]">{pack.name}</h3>
+    <article className={`flex flex-col rounded-2xl p-6 ${featured ? "bg-asphalt text-marquage" : "bg-white shadow-[0_1px_0_rgba(0,0,0,.04)] ring-1 ring-beton"}`}>
+      <h3 className="text-2xl">{pack.name}</h3>
       <p className={`mt-1 ${featured ? "text-marquage/70" : "text-gris"}`}>{pack.hours}{pack.minAge ? `, ${pack.minAge.toLowerCase()}` : ""}</p>
       <p className="mt-5 flex items-baseline gap-3">
-        <span className="font-display text-5xl font-extrabold">{euro(pack.price)}</span>
+        <span className="font-display text-5xl font-bold">{euro(pack.price)}</span>
         {pack.oldPrice && <s className={featured ? "text-marquage/55" : "text-gris"}>{euro(pack.oldPrice)}</s>}
       </p>
       <p className={`text-sm ${featured ? "text-marquage/60" : "text-gris"}`}>TTC</p>
@@ -124,7 +124,7 @@ export function CtaBand({ title = "On commence quand ?", text = "Passez à l'ag
     <section className="bg-rouge text-white">
       <Container className="flex flex-col items-start justify-between gap-6 py-14 md:flex-row md:items-center">
         <div>
-          <h2 className="text-[clamp(2.2rem,4vw,3.4rem)]">{title}</h2>
+          <h2 className="text-[clamp(1.9rem,3.6vw,2.9rem)]">{title}</h2>
           <p className="measure mt-2 text-white/85">{text}</p>
         </div>
         <div className="flex flex-wrap gap-3">
@@ -141,8 +141,8 @@ export function Steps({ steps, light = false }: { steps: { title: string; text: 
     <ol className="relative grid gap-8 md:grid-cols-2 lg:grid-cols-4">
       {steps.map((s, i) => (
         <li key={s.title} className="relative">
-          <span className={`font-display text-6xl font-extrabold ${light ? "text-marquage/25" : "text-rouge"}`}>{i + 1}</span>
-          <h3 className="mt-2 text-2xl">{s.title}</h3>
+          <span className={`grid h-10 w-10 place-items-center rounded-full font-semibold ${light ? "bg-white/15 text-marquage" : "bg-rouge text-white"}`}>{i + 1}</span>
+          <h3 className="mt-4 text-xl">{s.title}</h3>
           <p className={`mt-2 ${light ? "text-marquage/75" : "text-asphalt/75"}`}>{s.text}</p>
         </li>
       ))}

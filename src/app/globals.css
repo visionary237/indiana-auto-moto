@@ -1,11 +1,5 @@
-@import "@fontsource/barlow/400.css";
-@import "@fontsource/barlow/500.css";
-@import "@fontsource/barlow/600.css";
-@import "@fontsource/barlow-condensed/600.css";
-@import "@fontsource/barlow-condensed/700.css";
-@import "@fontsource/barlow-condensed/800.css";
-@import "@fontsource/instrument-serif/400.css";
-@import "@fontsource/instrument-serif/400-italic.css";
+@import "@fontsource-variable/bricolage-grotesque/index.css";
+@import "@fontsource-variable/geist/index.css";
 @import "tailwindcss";
 
 @theme {
@@ -29,10 +23,10 @@
   --color-sable-dark: #d6c7aa;
   --color-ocean: #12536a;
   --color-sunset: #e46f37;
-  --font-editorial: "Instrument Serif", Georgia, serif;
+  --font-editorial: "Bricolage Grotesque Variable", system-ui, sans-serif;
 
-  --font-sans: "Barlow", system-ui, sans-serif;
-  --font-display: "Barlow Condensed", "Arial Narrow", sans-serif;
+  --font-sans: "Geist Variable", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Bricolage Grotesque Variable", system-ui, sans-serif;
 }
 
 @layer base {
@@ -42,13 +36,15 @@
     color: var(--color-asphalt);
     font-family: var(--font-sans);
     font-size: 1.0625rem;
-    line-height: 1.6;
+    line-height: 1.65;
+    text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
   }
-  h1, h2, h3 { font-family: var(--font-display); line-height: 1.02; letter-spacing: -0.01em; }
-  h1 { font-weight: 800; }
-  h2 { font-weight: 700; }
-  h3 { font-weight: 700; }
+  h1, h2, h3 { font-family: var(--font-display); line-height: 1.06; letter-spacing: -0.025em; font-variation-settings: "wdth" 92; text-wrap: balance; }
+  h1 { font-weight: 700; }
+  h2 { font-weight: 650; }
+  h3 { font-weight: 600; letter-spacing: -0.015em; }
+  p { text-wrap: pretty; }
   :focus-visible { outline: 3px solid var(--color-rouge); outline-offset: 3px; border-radius: 2px; }
   ::selection { background: var(--color-rouge); color: white; }
 }
@@ -75,8 +71,8 @@
 
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
-  font-family: var(--font-display); font-weight: 700; font-size: 1.15rem; letter-spacing: .01em;
-  padding: .8rem 1.4rem; border-radius: 4px; transition: background-color .2s, color .2s, transform .2s;
+  font-family: var(--font-sans); font-weight: 600; font-size: 1rem; letter-spacing: -0.005em; line-height: 1.2; text-align: center;
+  min-height: 48px; padding: .8rem 1.5rem; border-radius: 999px; transition: background-color .2s, color .2s, transform .2s;
 }
 .btn:active { transform: translateY(1px); }
 .btn-rouge { background: var(--color-rouge); color: white; }
@@ -87,7 +83,7 @@
 
 .field label { display:block; font-weight:600; font-size:.95rem; margin-bottom:.35rem; }
 .field input, .field select, .field textarea {
-  width:100%; background:white; border:2px solid var(--color-beton); border-radius:4px; padding:.7rem .85rem; font:inherit;
+  width:100%; background:white; border:2px solid var(--color-beton); border-radius:10px; padding:.75rem .9rem; font:inherit; font-size:16px; min-height:48px;
 }
 .field input:focus, .field select:focus, .field textarea:focus { outline:none; border-color: var(--color-asphalt); }
 .field .hint { font-size:.85rem; color: var(--color-gris); margin-top:.25rem; }
@@ -95,7 +91,7 @@
 }
 
 /* Road Trip */
-.font-editorial { font-family: var(--font-editorial); font-weight: 400; letter-spacing: -0.015em; line-height: .95; }
+.font-editorial { font-family: var(--font-editorial); font-weight: 650; letter-spacing: -0.03em; line-height: 1.04; font-variation-settings: "wdth" 90; }
 .btn-sunset { background: var(--color-sunset); color: var(--color-carbone); }
 .btn-sunset:hover { background: #f08550; }
 .btn-sable { background: var(--color-sable); color: var(--color-carbone); }
@@ -103,7 +99,11 @@
 .grain::after { content:""; position:absolute; inset:0; pointer-events:none; opacity:.08; mix-blend-mode:overlay;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
 .rt-field label { display:block; font-weight:600; font-size:.95rem; margin-bottom:.35rem; }
-.rt-field input, .rt-field select, .rt-field textarea { width:100%; background:#fffaf1; border:2px solid var(--color-sable-dark); border-radius:6px; padding:.7rem .85rem; font:inherit; color: var(--color-carbone); }
+.rt-field input, .rt-field select, .rt-field textarea { width:100%; background:#fff; border:2px solid var(--color-sable-dark); border-radius:10px; padding:.75rem .9rem; font:inherit; font-size:16px; min-height:48px; color: var(--color-carbone); }
 .rt-field input:focus, .rt-field select:focus, .rt-field textarea:focus { outline:none; border-color: var(--color-foret); }
-.rt-chip { border:2px solid currentColor; border-radius:999px; padding:.35rem .9rem; font-weight:600; font-size:.95rem; transition: background-color .15s, color .15s; }
-.rt-chip[aria-pressed="true"] { background: var(--color-sable); color: var(--color-carbone); border-color: var(--color-sable); }
+.rt-chip { border:2px solid currentColor; border-radius:999px; padding:.5rem 1rem; min-height:44px; font-weight:600; font-size:.95rem; transition: background-color .15s, color .15s; }
+.rt-chip[aria-pressed="true"] { background: var(--color-foret); color: #fff; border-color: var(--color-foret); }
+
+/* Masque le CTA collant quand le menu est ouvert */
+.menu-open .sticky-cta { display: none; }
+input[type="checkbox"], input[type="radio"]:not(.sr-only) { width: 1.25rem; height: 1.25rem; flex: none; }

@@ -42,9 +42,9 @@ export function Timeline14({ jours }: { jours: Jour[] }) {
               aria-controls="jour-panel"
               tabIndex={on ? 0 : -1}
               onClick={() => setSel(i)}
-              className={`relative min-w-[64px] rounded-md border-2 px-2 py-3 text-left transition-colors ${on ? "border-carbone bg-carbone text-sable" : "border-sable-dark bg-white/60 hover:border-carbone"}`}
+              className={`relative min-w-[64px] rounded-md border-2 px-2 py-3 text-left transition-colors ${on ? "border-carbone bg-carbone text-white" : "border-beton bg-white hover:border-carbone"}`}
             >
-              <span className="block font-display text-2xl font-bold leading-none">J{d.jour}</span>
+              <span className="block font-display text-xl font-semibold leading-none">J{d.jour}</span>
               <span className={`block text-xs ${on ? "text-sable/70" : "text-gris"}`}>{d.jour_semaine.slice(0, 3)}.</span>
               <span className="mt-2 flex gap-1" aria-hidden="true">
                 {d.type.includes("formation") && <span className={`h-1.5 w-1.5 rounded-full ${on ? "bg-sable" : "bg-carbone"}`} />}
@@ -56,22 +56,22 @@ export function Timeline14({ jours }: { jours: Jour[] }) {
         })}
       </div>
 
-      <div id="jour-panel" role="tabpanel" aria-live="polite" className="mt-6 overflow-hidden rounded-xl bg-white/70">
+      <div id="jour-panel" role="tabpanel" aria-live="polite" className="mt-6 overflow-hidden rounded-2xl bg-white">
         <AnimatePresence mode="wait">
           <motion.div key={sel} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.25 }} className="grid gap-8 p-6 md:grid-cols-[1fr_1.2fr_1.2fr] md:p-10">
             <div>
-              <p className="font-display text-lg font-semibold text-gris">Jour {j.jour}, {j.jour_semaine.toLowerCase()}</p>
-              <h3 className="font-editorial mt-1 text-4xl md:text-5xl">{j.titre}</h3>
+              <p className="text-sm font-medium text-gris">Jour {j.jour}, {j.jour_semaine.toLowerCase()}</p>
+              <h3 className="mt-1 text-2xl md:text-3xl">{j.titre}</h3>
               <div className="mt-4 flex flex-wrap gap-2">
                 {j.type.map((t) => <span key={t} className={`rounded-full px-3 py-1 text-sm font-semibold ${TYPE_LABEL[t]?.cls}`}>{TYPE_LABEL[t]?.label}</span>)}
               </div>
             </div>
             <div>
-              <p className="font-display text-xl font-bold">Formation</p>
+              <p className="font-semibold">Formation</p>
               <p className="mt-2 text-carbone/80">{j.formation}</p>
             </div>
             <div>
-              <p className="font-display text-xl font-bold text-foret">Temps libre et découverte</p>
+              <p className="font-semibold text-foret">Temps libre</p>
               <p className="mt-2 text-carbone/80">{j.decouverte}</p>
             </div>
           </motion.div>

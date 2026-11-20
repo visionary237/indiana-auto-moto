@@ -152,14 +152,14 @@ export const motoGear = [
   "Bottes ou chaussures montantes",
 ];
 
-export const nav = [
+export const nav: { href: string; label: string; mobileOnly?: boolean }[] = [
   { href: "/permis-auto/", label: "Permis auto" },
   { href: "/permis-moto/", label: "Permis moto" },
+  { href: "/stage-moto-normandie/", label: "Stage moto & séjour" },
   { href: "/formations-accelerees/", label: "Accéléré" },
   { href: "/stages/", label: "Stages" },
-  { href: "/stage-moto-normandie/", label: "Stage moto & séjour" },
   { href: "/tarifs-financements/", label: "Tarifs" },
-  { href: "/equipe/", label: "Équipe" },
+  { href: "/equipe/", label: "Équipe", mobileOnly: true },
   { href: "/faq/", label: "FAQ" },
 ];
 

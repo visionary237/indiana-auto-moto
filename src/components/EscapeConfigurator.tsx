@@ -90,7 +90,7 @@ export function EscapeConfigurator() {
   }
 
   return (
-    <div className="grid gap-8 lg:grid-cols-[1.4fr_1fr]">
+    <div className="grid grid-cols-[minmax(0,1fr)] gap-8 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
       <div className="rounded-md bg-white p-6 md:p-8">
         <ol className="mb-8 flex gap-2 text-sm font-semibold" aria-label="Étapes">
           {["Votre séjour", "Votre profil", "Envoyé"].map((s, i) => (
@@ -243,7 +243,7 @@ export function EscapeConfigurator() {
         </ul>
         <p className="mt-5 flex items-baseline justify-between">
           <span>Formation, à partir de</span>
-          <motion.span key={total} initial={{ opacity: 0.4, y: -4 }} animate={{ opacity: 1, y: 0 }} className="font-display text-5xl font-extrabold">{euro(total)}</motion.span>
+          <motion.span key={total} initial={{ opacity: 0.4, y: -4 }} animate={{ opacity: 1, y: 0 }} className="font-display text-5xl font-bold">{euro(total)}</motion.span>
         </p>
         <p className="mt-4 text-sm text-marquage/70">
           Estimation indicative TTC, établie à partir des tarifs actuels de l'école. Elle ne constitue pas une offre. Les dates d'examen sont attribuées par l'administration : elles ne peuvent pas être garanties, pas plus que l'obtention du permis.

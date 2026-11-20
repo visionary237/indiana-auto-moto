@@ -58,7 +58,7 @@ export default function PermisMoto() {
           <div className="grid gap-px overflow-hidden rounded-md bg-beton md:grid-cols-3">
             {categories.map((c) => (
               <div key={c.name} className="bg-marquage p-7">
-                <p className="font-display text-7xl font-extrabold text-rouge">{c.name}</p>
+                <p className="font-display text-7xl font-bold text-rouge">{c.name}</p>
                 <p className="mt-1 font-semibold">{c.age}</p>
                 <p className="mt-2 text-asphalt/75">{c.text}</p>
               </div>

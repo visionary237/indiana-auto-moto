@@ -15,7 +15,7 @@ export function HeroIntro() {
     <section className="relative overflow-hidden bg-beton">
       <div className="mx-auto grid max-w-7xl gap-10 px-5 pb-0 pt-12 lg:grid-cols-[1.15fr_1fr] lg:px-8 lg:pt-20">
         <div className="pb-14 lg:pb-24">
-          <h1 className="text-[clamp(3rem,7.2vw,6.4rem)] leading-[0.95]">
+          <h1 className="text-[clamp(2.4rem,6vw,5rem)] leading-[1.02]">
             {lines.map((l, i) => (
               <span key={l} className="block overflow-hidden">
                 <motion.span
@@ -69,7 +69,6 @@ export function HeroIntro() {
           </div>
         </motion.div>
       </div>
-      <div className="lane text-asphalt" aria-hidden="true" />
     </section>
   );
 }

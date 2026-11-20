@@ -59,8 +59,8 @@ export type Partenaire = {
 };
 
 export type Jour = { jour: number; jour_semaine: string; titre: string; formation: string; decouverte: string; type: string[] };
-export type Ligne = { libelle: string; prix: number | null; statut: "inclus" | "option" | "a-confirmer" | "candidat"; note?: string; unite?: string };
-export type Formule = { id: string; nom: string; pour: string; lignes: Ligne[] };
+export type Regle = "toujours" | "si-code-a-preparer" | "si-hebergement" | "si-besoin" | "a-confirmer" | "a-votre-charge";
+export type Composante = { id: string; libelle: string; detail: string; prix: number | null; unite?: string; regle: Regle };
 export type Destination = { id: string; nom: string; lat: number; lng: number; distance: string; image: string | null; texte: string };
 export type Lieu = { nom: string; categorie: string; lat: number; lng: number; incontournable?: boolean };
 
@@ -68,13 +68,14 @@ export const sessions = (sessionsData.sessions as Session[]).filter((s) => s.sta
 export const hebergements = (hebergementsData.hebergements as Hebergement[]).filter((h) => h.valide).map((h) => ({ ...h, photos: h.photos.map(asset) }));
 export const partenaires = (partenairesData.partenaires as Partenaire[]).map((p) => ({ ...p, photos: p.photos.map(asset) }));
 export const programme = programmeData.jours as Jour[];
-export const formules = formulesData.formules as Formule[];
-export const hebergementPrix = formulesData.hebergement_prix as number | null;
+export const composantes = formulesData.composantes as Composante[];
 export const heureSup = formulesData.heure_supplementaire;
+export const MISE_A_JOUR = formulesData.mise_a_jour;
+export const prixFormationA2 = composantes.find((c) => c.id === "formation")!.prix as number;
+export const prixCode = composantes.find((c) => c.id === "code")!.prix as number;
 export const destinations = (destinationsData.destinations as Destination[]).map((d) => ({ ...d, image: d.image ? asset(d.image) : null }));
 export const lieux = destinationsData.lieux as Lieu[];
 
-export const prixFormation = (f: Formule) => f.lignes.filter((l) => l.statut === "inclus" && l.prix).reduce((s, l) => s + (l.prix ?? 0), 0);
 
 export const MAP_FILTERS = [
   { id: "incontournable", label: "Incontournables" },

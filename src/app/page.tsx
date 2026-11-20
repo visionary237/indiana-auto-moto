@@ -63,7 +63,7 @@ export default function Home() {
             {piste.facts.map((f) => (
               <div key={f.label} className="border-l-4 border-rouge pl-5">
                 <dt className="sr-only">{f.label}</dt>
-                <dd className="font-display text-5xl font-extrabold">{f.value}</dd>
+                <dd className="font-display text-5xl font-bold">{f.value}</dd>
                 <dd className="text-marquage/70">{f.label}</dd>
               </div>
             ))}
@@ -86,12 +86,12 @@ export default function Home() {
           <SectionTitle title="Pressé, déjà titulaire, ou envie d'ailleurs ?" />
           <div className="grid gap-6 lg:grid-cols-3">
             <Link href="/formations-accelerees/" className="group rounded-md bg-white p-7 hover:outline hover:outline-2 hover:outline-asphalt">
-              <p className="font-display text-5xl font-extrabold text-rouge">{euro(packs.find((p) => p.slug === "auto-accelere")!.price)}</p>
+              <p className="font-display text-5xl font-bold text-rouge">{euro(packs.find((p) => p.slug === "auto-accelere")!.price)}</p>
               <h3 className="mt-3 text-3xl">Permis B accéléré</h3>
               <p className="mt-2 text-asphalt/75">20 heures de conduite planifiées sur une période resserrée, finançable par le CPF sous conditions.</p>
             </Link>
             <Link href="/stages/" className="group rounded-md bg-white p-7 hover:outline hover:outline-2 hover:outline-asphalt">
-              <p className="font-display text-5xl font-extrabold text-rouge">dès {euro(Math.min(...stages.map((s) => s.price)))}</p>
+              <p className="font-display text-5xl font-bold text-rouge">dès {euro(Math.min(...stages.map((s) => s.price)))}</p>
               <h3 className="mt-3 text-3xl">Stages et perfectionnement</h3>
               <p className="mt-2 text-asphalt/75">Formation 125 cm³, passerelle A2 vers A, permis AM, stage jeune conducteur, passage en boîte manuelle.</p>
             </Link>

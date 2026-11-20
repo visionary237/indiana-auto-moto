@@ -94,25 +94,19 @@ collections:
               - { name: decouverte, label: Découverte, widget: text }
               - { name: type, label: Types, widget: select, multiple: true, options: [arrivee, formation, decouverte, examen, depart] }
       - name: formules
-        label: Formules et prix
+        label: Prix du stage
         file: content/roadtrip/formules.json
         fields:
           - { name: _aide, label: Aide, widget: hidden }
-          - { name: hebergement_prix, label: Prix hébergement (vide tant que non signé), widget: number, required: false }
+          - { name: mise_a_jour, label: Date de mise à jour des prix, widget: datetime, format: YYYY-MM-DD, time_format: false }
           - { name: heure_supplementaire, label: Heure supplémentaire (€), widget: number }
-          - name: formules
-            label: Formules
+          - name: composantes
+            label: Composantes du prix
             widget: list
             fields:
               - { name: id, label: Identifiant, widget: string }
-              - { name: nom, label: Nom, widget: string }
-              - { name: pour, label: Pour qui, widget: string }
-              - name: lignes
-                label: Composantes
-                widget: list
-                fields:
-                  - { name: libelle, label: Libellé, widget: string }
-                  - { name: prix, label: Prix (€), widget: number, required: false }
-                  - { name: unite, label: Unité, widget: string, required: false }
-                  - { name: statut, label: Statut, widget: select, options: [inclus, option, a-confirmer, candidat] }
-                  - { name: note, label: Note, widget: string, required: false }
+              - { name: libelle, label: Libellé, widget: string }
+              - { name: detail, label: Détail, widget: text }
+              - { name: prix, label: Prix en euros (laisser vide si sur devis), widget: number, required: false }
+              - { name: unite, label: Unité, widget: string, required: false }
+              - { name: regle, label: Quand l'afficher, widget: select, options: [toujours, si-code-a-preparer, si-hebergement, si-besoin, a-confirmer, a-votre-charge] }

@@ -36,7 +36,7 @@ export function ExploreMap({ destinations, lieux }: { destinations: Destination[
   const toggle = (id: string) => setFilters((v) => (v.includes(id) ? v.filter((x) => x !== id) : [...v, id]));
 
   return (
-    <div className="grid gap-8 lg:grid-cols-[1.2fr_1fr]">
+    <div className="grid grid-cols-[minmax(0,1fr)] gap-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)]">
       <div>
         <div className="mb-4 flex flex-wrap gap-2" role="group" aria-label="Filtrer la carte">
           {MAP_FILTERS.map((f) => (
@@ -45,7 +45,7 @@ export function ExploreMap({ destinations, lieux }: { destinations: Destination[
             </button>
           ))}
         </div>
-        <div className="relative overflow-hidden rounded-xl bg-ocean">
+        <div className="relative overflow-hidden rounded-2xl bg-ocean">
           <svg viewBox={`0 0 ${W.toFixed(0)} ${H.toFixed(0)}`} className="h-auto w-full" role="img" aria-label="Carte de la côte normande autour du Havre">
             <defs>
               <pattern id="waves" width="24" height="12" patternUnits="userSpaceOnUse"><path d="M0 6 Q6 2 12 6 T24 6" fill="none" stroke="#fff" strokeOpacity=".08" /></pattern>
@@ -55,8 +55,8 @@ export function ExploreMap({ destinations, lieux }: { destinations: Destination[
             <path d={toPath(ALBATRE)} fill="none" stroke="#f1ece2" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round" opacity=".9" />
             <path d={toPath(SEINE)} fill="none" stroke="#2b7c8f" strokeWidth="5" strokeLinecap="round" />
             {(() => { const [cx, cy] = px(0.2, 49.22); return <ellipse cx={cx} cy={cy} rx="95" ry="55" fill="none" stroke="#e9dfcb" strokeOpacity=".5" strokeDasharray="6 6" />; })()}
-            {(() => { const [x, y] = px(0.74, 49.58); return <text x={x} y={y} fill="#e9dfcb" fillOpacity=".6" fontSize="18" fontStyle="italic" fontFamily="Instrument Serif, serif">Pays de Caux</text>; })()}
-            {(() => { const [x, y] = px(0.36, 49.92); return <text x={x} y={y} fill="#e9dfcb" fillOpacity=".7" fontSize="20" fontStyle="italic" fontFamily="Instrument Serif, serif">La Manche</text>; })()}
+            {(() => { const [x, y] = px(0.74, 49.58); return <text x={x} y={y} fill="#e9dfcb" fillOpacity=".6" fontSize="18" fontStyle="italic" fontFamily="Bricolage Grotesque Variable, sans-serif">Pays de Caux</text>; })()}
+            {(() => { const [x, y] = px(0.36, 49.92); return <text x={x} y={y} fill="#e9dfcb" fillOpacity=".7" fontSize="20" fontStyle="italic" fontFamily="Bricolage Grotesque Variable, sans-serif">La Manche</text>; })()}
 
             {visible.map((l) => {
               const [x, y] = px(l.lng, l.lat);
@@ -66,46 +66,46 @@ export function ExploreMap({ destinations, lieux }: { destinations: Destination[
             {destinations.map((d) => {
               const [x, y] = px(d.lng, d.lat);
               const on = d.id === selected;
-              const left = ["trouville", "deauville", "le-havre"].includes(d.id);
+              const left = ["trouville", "deauville", "le-havre", "veules"].includes(d.id);
               return (
                 <g key={d.id} role="button" tabIndex={0} aria-label={`Voir ${d.nom}`} aria-pressed={on} className="cursor-pointer focus:outline-none" onClick={() => setSelected(d.id)} onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && (e.preventDefault(), setSelected(d.id))}>
                   <circle cx={x} cy={y} r={on ? 13 : 9} fill={on ? "#e46f37" : "#e9dfcb"} stroke="#15171a" strokeWidth="3" />
-                  <text x={left ? x - 16 : x + 16} y={y + (d.id === "trouville" ? -10 : d.id === "deauville" ? 18 : 6)} textAnchor={left ? "end" : "start"} fill="#fff" fontSize={on ? 22 : 18} fontFamily="Barlow Condensed, sans-serif" fontWeight="700" paintOrder="stroke" stroke="#15171a" strokeWidth="4">
+                  <text x={left ? x - 16 : x + 16} y={y + (d.id === "trouville" ? -10 : d.id === "deauville" ? 18 : 6)} textAnchor={left ? "end" : "start"} fill="#fff" fontSize={on ? 22 : 18} fontFamily="Bricolage Grotesque Variable, sans-serif" fontWeight="600" paintOrder="stroke" stroke="#15171a" strokeWidth="4">
                     {d.nom}
                   </text>
                 </g>
               );
             })}
             {(() => { const [x, y] = px(SCHOOL.lng, SCHOOL.lat); return (
-              <g aria-label="Indiana Auto-Moto"><circle cx={x} cy={y} r="8" fill="#d3271c" stroke="#fff" strokeWidth="3" /><text x={x + 14} y={y + 26} fill="#fff" fontSize="15" fontFamily="Barlow, sans-serif" fontWeight="600" paintOrder="stroke" stroke="#15171a" strokeWidth="4">Indiana</text></g>
+              <g aria-label="Indiana Auto-Moto"><circle cx={x} cy={y} r="8" fill="#d3271c" stroke="#fff" strokeWidth="3" /><text x={x + 14} y={y + 26} fill="#fff" fontSize="15" fontFamily="Geist Variable, sans-serif" fontWeight="600" paintOrder="stroke" stroke="#15171a" strokeWidth="4">Indiana</text></g>
             ); })()}
           </svg>
           <p className="absolute bottom-3 left-4 text-xs text-white/70">Carte schématique. Côte d'Albâtre en blanc.</p>
         </div>
         {empty.length > 0 && (
-          <p className="mt-3 text-sm text-sable/80" role="status">
+          <p className="mt-3 text-sm text-carbone/70" role="status">
             {empty.map((e) => MAP_FILTERS.find((f) => f.id === e)?.label).join(", ")} : adresses en cours de sélection. Aucune adresse n'est publiée sans l'accord de l'établissement.
           </p>
         )}
       </div>
 
       <AnimatePresence mode="wait">
-        <motion.article key={dest.id} initial={{ opacity: 0, x: 16 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -16 }} transition={{ duration: 0.3 }} className="flex flex-col overflow-hidden rounded-xl bg-sable text-carbone">
+        <motion.article key={dest.id} initial={{ opacity: 0, x: 16 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -16 }} transition={{ duration: 0.3 }} className="flex flex-col overflow-hidden rounded-2xl bg-white text-carbone">
           <div className="relative aspect-[16/10] bg-foret">
             {dest.image ? (
               // eslint-disable-next-line @next/next/no-img-element
               <img src={dest.image} alt={dest.nom} className="absolute inset-0 h-full w-full object-cover" loading="lazy" />
             ) : (
-              <span className="font-editorial absolute inset-0 grid place-items-center p-6 text-center text-5xl text-sable/90">{dest.nom}</span>
+              <span className="absolute inset-0 grid place-items-center p-6 text-center font-display text-4xl font-semibold text-sable/90">{dest.nom}</span>
             )}
           </div>
           <div className="flex flex-1 flex-col p-6 md:p-8">
-            <p className="font-display text-lg font-semibold text-foret">{dest.distance}{dest.distance.startsWith("≈") ? " de l'école" : ""}</p>
-            <h3 className="font-editorial text-5xl">{dest.nom}</h3>
+            <p className="text-sm font-medium text-foret">{dest.distance}{dest.distance.startsWith("≈") ? " de l'école" : ""}</p>
+            <h3 className="text-3xl md:text-4xl">{dest.nom}</h3>
             <p className="measure mt-3 text-carbone/80">{dest.texte}</p>
             <div className="mt-6 flex flex-wrap gap-2">
               {destinations.map((d) => (
-                <button key={d.id} type="button" onClick={() => setSelected(d.id)} className={`rounded-full px-3 py-1 text-sm font-semibold ${d.id === selected ? "bg-carbone text-sable" : "bg-sable-dark/60 hover:bg-sable-dark"}`}>{d.nom}</button>
+                <button key={d.id} type="button" onClick={() => setSelected(d.id)} className={`rounded-full px-3 py-1 text-sm font-semibold ${d.id === selected ? "bg-carbone text-white" : "bg-[#eef1ef] hover:bg-beton"}`}>{d.nom}</button>
               ))}
             </div>
             <p className="mt-auto pt-6 text-xs text-carbone/60">Distances approximatives par la route. Les visites et sorties sont libres et à votre charge.</p>

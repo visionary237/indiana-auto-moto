@@ -23,7 +23,7 @@ export function MiniLeadForm({ kind, stage, cta, fields, done, tone = "dark" }: 
       setStatus("error");
     }
   }
-  if (status === "sent") return <p role="status" className="font-editorial text-3xl">{done}</p>;
+  if (status === "sent") return <p role="status" className="font-display text-2xl font-semibold">{done}</p>;
   const id = kind.replace(/\W+/g, "-").toLowerCase();
   return (
     <form onSubmit={submit} className="grid gap-4 sm:grid-cols-[repeat(auto-fit,minmax(200px,1fr))] sm:items-end">

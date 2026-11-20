@@ -1,39 +1,14 @@
 {
-  "_aide": "Prix TTC issus des tarifs Indiana. hebergement_prix : null tant que le contrat n'est pas signé.",
-  "hebergement_prix": null,
+  "_aide": "Composantes du prix du stage. prix: null = communiqué dans le devis. Le prix final du stage n'est jamais affiché tant que les frais d'organisation et l'hébergement ne sont pas fixés.",
+  "mise_a_jour": "2026-11-20",
   "heure_supplementaire": 60,
-  "formules": [
-    {
-      "id": "code-obtenu",
-      "nom": "Road Trip, code moto obtenu",
-      "pour": "Vous avez déjà réussi l'examen théorique moto (ETM).",
-      "lignes": [
-        { "libelle": "Formation permis A2 : 20 h de conduite, frais de dossier, livret, évaluation", "prix": 790, "statut": "inclus" },
-        { "libelle": "Accompagnement aux épreuves plateau et circulation", "prix": 0, "statut": "inclus", "note": "Compris dans le forfait A2" },
-        { "libelle": "Hébergement 13 nuits", "prix": null, "statut": "inclus", "note": "Tarif communiqué à l'ouverture des sessions" },
-        { "libelle": "Accueil, planning personnalisé, guide de séjour", "prix": 0, "statut": "inclus" },
-        { "libelle": "Heures de conduite supplémentaires", "prix": 60, "unite": "l'heure", "statut": "option" },
-        { "libelle": "Prêt d'équipement (casque, gants)", "prix": null, "statut": "a-confirmer" },
-        { "libelle": "Transport aller-retour jusqu'au Havre", "prix": null, "statut": "candidat" },
-        { "libelle": "Repas, sorties et activités touristiques", "prix": null, "statut": "candidat" }
-      ]
-    },
-    {
-      "id": "code-a-preparer",
-      "nom": "Road Trip, code moto à préparer",
-      "pour": "Vous devez encore réussir l'examen théorique moto (ETM) : il se prépare en ligne avant le séjour.",
-      "lignes": [
-        { "libelle": "Formation code moto en ligne, suivie par l'école", "prix": 40, "statut": "inclus" },
-        { "libelle": "Redevance de l'examen du code (prestataire agréé)", "prix": 30, "statut": "inclus", "note": "Examen à passer avant l'arrivée, dans un centre près de chez vous" },
-        { "libelle": "Formation permis A2 : 20 h de conduite, frais de dossier, livret, évaluation", "prix": 790, "statut": "inclus" },
-        { "libelle": "Accompagnement aux épreuves plateau et circulation", "prix": 0, "statut": "inclus", "note": "Compris dans le forfait A2" },
-        { "libelle": "Hébergement 13 nuits", "prix": null, "statut": "inclus", "note": "Tarif communiqué à l'ouverture des sessions" },
-        { "libelle": "Accueil, planning personnalisé, guide de séjour", "prix": 0, "statut": "inclus" },
-        { "libelle": "Heures de conduite supplémentaires", "prix": 60, "unite": "l'heure", "statut": "option" },
-        { "libelle": "Prêt d'équipement (casque, gants)", "prix": null, "statut": "a-confirmer" },
-        { "libelle": "Transport aller-retour jusqu'au Havre", "prix": null, "statut": "candidat" },
-        { "libelle": "Repas, sorties et activités touristiques", "prix": null, "statut": "candidat" }
-      ]
-    }
+  "composantes": [
+    { "id": "formation", "libelle": "Formation au permis A2", "detail": "Tarif de l'école : 20 h de conduite, frais de dossier, livret, évaluation, accompagnement aux deux épreuves.", "prix": 790, "regle": "toujours" },
+    { "id": "code", "libelle": "Préparation au code moto", "detail": "Formation en ligne suivie par l'école (40 €) et redevance de l'examen (30 €). Examen à passer avant le stage.", "prix": 70, "regle": "si-code-a-preparer" },
+    { "id": "organisation", "libelle": "Frais d'organisation du stage", "detail": "Planning intensif dédié, coordination des leçons et du logement, suivi avant et pendant le séjour.", "prix": null, "regle": "toujours" },
+    { "id": "hebergement", "libelle": "Hébergement, 13 nuits", "detail": "En option. Tarif selon le logement choisi.", "prix": null, "regle": "si-hebergement" },
+    { "id": "heures", "libelle": "Heures de conduite supplémentaires", "detail": "Uniquement si votre moniteur les juge utiles, avec votre accord.", "prix": 60, "unite": "l'heure", "regle": "si-besoin" },
+    { "id": "equipement", "libelle": "Prêt d'équipement (casque, gants)", "detail": "Possibilité précisée à l'ouverture des sessions.", "prix": null, "regle": "a-confirmer" },
+    { "id": "candidat", "libelle": "Transport, repas et loisirs", "detail": "Restent à votre charge.", "prix": null, "regle": "a-votre-charge" }
   ]
 }

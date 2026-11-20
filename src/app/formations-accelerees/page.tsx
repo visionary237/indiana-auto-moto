@@ -48,7 +48,7 @@ export default function Accelere() {
         </Container>
       </section>
 
-      <RoadTripCta title="Votre permis moto en accéléré, version séjour" text="Pour le permis moto, Indiana Road Trip concentre votre formation A2 sur deux semaines au Havre, hébergement compris." />
+      <RoadTripCta title="Le permis moto en accéléré ? Faites-le en stage." text="Votre formation A2 regroupée sur deux semaines au Havre, avec un planning intensif et un hébergement en option." />
 
       <section className="bg-beton py-16">
         <Container>

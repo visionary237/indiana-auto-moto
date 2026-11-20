@@ -5,7 +5,6 @@ import { documents, nav, school } from "@/lib/content";
 export function Footer() {
   return (
     <footer className="bg-asphalt text-marquage">
-      <div className="lane text-rouge" aria-hidden="true" />
       <div className="mx-auto grid max-w-7xl gap-12 px-5 py-16 md:grid-cols-2 lg:grid-cols-4 lg:px-8">
         <div>
           <Logo light />
@@ -48,8 +47,8 @@ export function Footer() {
 
         <div>
           <Link href="/stage-moto-normandie/" className="mb-8 block rounded-md bg-foret p-5 hover:bg-foret-light">
-            <span className="block font-editorial text-3xl text-sable">Indiana Road Trip</span>
-            <span className="text-sm text-sable/80">Stage moto et séjour en Normandie</span>
+            <span className="block font-display text-xl font-semibold text-sable">Stage moto en Normandie</span>
+            <span className="text-sm text-sable/80">Deux semaines au Havre, hébergement en option</span>
           </Link>
           <h2 className="text-2xl">Documents</h2>
           <ul className="mt-4 space-y-1.5">

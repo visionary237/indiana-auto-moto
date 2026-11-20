@@ -5,10 +5,10 @@ Chaque formulaire envoie un POST JSON à `NEXT_PUBLIC_LEADS_ENDPOINT` (webhook n
 
 | Formulaire | `kind` | Étape CRM initiale |
 |---|---|---|
-| Alerte d'ouverture des sessions | `Road Trip : alerte sessions` | Prospect |
-| Configurateur, profil incomplet ou demande sur mesure | `Road Trip : demande de séjour` | Demande de renseignements |
-| Configurateur, A2 + 2 semaines disponibles | `Road Trip : demande de séjour` | Candidat qualifié |
-| Candidature partenaire | `Road Trip : candidature partenaire` | Pipeline partenaires |
+| Alerte d'ouverture des sessions | `Stage moto Normandie : alerte sessions` | Prospect |
+| Configurateur, profil incomplet ou demande sur mesure | `Stage moto Normandie : demande de séjour` | Demande de renseignements |
+| Configurateur, A2 + 2 semaines disponibles | `Stage moto Normandie : demande de séjour` | Candidat qualifié |
+| Candidature partenaire | `Stage moto Normandie : candidature partenaire` | Pipeline partenaires |
 
 ## Pipeline commercial
 

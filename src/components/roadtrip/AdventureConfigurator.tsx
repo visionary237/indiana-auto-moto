@@ -43,12 +43,12 @@ export function AdventureConfigurator({ prix }: { prix: { codeObtenu: number; co
 
   const reco = useMemo(() => {
     const reasons: string[] = [];
-    if (a.permis !== "a2") reasons.push(a.permis === "nsp" ? "Nous vous aidons à choisir la catégorie adaptée." : "Le séjour est conçu pour le permis A2 : nous étudions une formule sur mesure.");
-    if (a.deuxSemaines === "non") reasons.push("Le séjour compte deux semaines : nous regardons un format plus court.");
+    if (a.permis !== "a2") reasons.push(a.permis === "nsp" ? "Nous vous aidons à choisir la catégorie adaptée." : "Le stage est conçu pour le permis A2 : nous étudions une formule sur mesure.");
+    if (a.deuxSemaines === "non") reasons.push("Le stage dure deux semaines : nous regardons un format plus court.");
     if (a.niveau === "echec") reasons.push("Nous adaptons le programme à votre précédent passage.");
     const perso = reasons.length > 0;
-    const formule = a.code === "obtenu" ? { nom: "Road Trip, code moto obtenu", prix: prix.codeObtenu } : { nom: "Road Trip, code moto à préparer", prix: prix.codeAPreparer };
-    const warn = a.code === "non" ? "Le code moto doit être réussi avant de passer les épreuves pratiques : comptez quelques semaines de révision en ligne avant le séjour." : null;
+    const formule = a.code === "obtenu" ? { nom: "Stage A2, code moto obtenu", prix: prix.codeObtenu } : { nom: "Stage A2, code moto à préparer", prix: prix.codeAPreparer };
+    const warn = a.code === "non" ? "Le code moto doit être réussi avant les épreuves pratiques. Prévoyez quelques semaines de révision en ligne avant le stage." : null;
     const qualifie = !perso && a.deuxSemaines === "oui";
     return { perso, reasons, formule, warn, qualifie };
   }, [a, prix]);
@@ -59,7 +59,7 @@ export function AdventureConfigurator({ prix }: { prix: { codeObtenu: number; co
     if (fd.get("site")) return;
     setStatus("sending");
     try {
-      const r = await sendLead("Road Trip : demande de séjour", {
+      const r = await sendLead("Stage moto Normandie : demande de séjour", {
         "Étape CRM": reco.qualifie ? "Candidat qualifié" : "Demande de renseignements",
         Source: "stage-moto-normandie",
         "Formule proposée": reco.perso ? "Demande personnalisée" : reco.formule.nom,
@@ -84,8 +84,8 @@ export function AdventureConfigurator({ prix }: { prix: { codeObtenu: number; co
   const steps = ["Votre projet", "Votre séjour", "Vos coordonnées"];
 
   return (
-    <div className="grid gap-8 lg:grid-cols-[1.5fr_1fr]">
-      <div className="rounded-2xl bg-sable p-6 text-carbone md:p-10">
+    <div className="grid grid-cols-[minmax(0,1fr)] gap-8 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)]">
+      <div className="rounded-2xl bg-white p-5 text-carbone shadow-sm md:p-10">
         <ol className="mb-8 flex gap-2 text-sm font-semibold" aria-label="Étapes">
           {steps.map((s, i) => (
             <li key={s} aria-current={step === i ? "step" : undefined} className={`flex-1 border-t-4 pt-2 ${step >= i ? "border-foret text-foret" : "border-sable-dark text-gris"}`}>{s}</li>
@@ -94,17 +94,17 @@ export function AdventureConfigurator({ prix }: { prix: { codeObtenu: number; co
 
         {status === "sent" ? (
           <div role="status">
-            <h3 className="font-editorial text-5xl">C'est noté.</h3>
-            <p className="measure mt-3 text-carbone/80">Vous recevez un e-mail de confirmation. L'équipe vous recontacte avec les prochaines sessions et une proposition adaptée à votre projet.</p>
+            <h3 className="font-display text-4xl font-semibold">Demande envoyée</h3>
+            <p className="measure mt-3 text-carbone/80">Vous recevez un e-mail de confirmation. Nous vous rappelons pour préciser votre projet, puis vous recevez votre devis détaillé.</p>
           </div>
         ) : (
           <AnimatePresence mode="wait">
             {step === 0 && (
               <motion.div key="p" initial={{ opacity: 0, x: 14 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -14 }} className="space-y-7">
-                <fieldset><legend className="mb-3 font-display text-2xl font-bold">Quel permis visez-vous&nbsp;?</legend><Choice name="permis" value={a.permis} onChange={set("permis")} options={Q.permis} /></fieldset>
-                <fieldset><legend className="mb-3 font-display text-2xl font-bold">Le code moto (ETM)</legend><Choice name="code" value={a.code} onChange={set("code")} options={Q.code} /></fieldset>
-                <fieldset><legend className="mb-3 font-display text-2xl font-bold">Votre expérience</legend><Choice name="experience" value={a.experience} onChange={set("experience")} options={Q.experience} /></fieldset>
-                <fieldset><legend className="mb-3 font-display text-2xl font-bold">Votre niveau actuel</legend><Choice name="niveau" value={a.niveau} onChange={set("niveau")} options={Q.niveau} /></fieldset>
+                <fieldset><legend className="mb-3 text-lg font-semibold">Quel permis visez-vous&nbsp;?</legend><Choice name="permis" value={a.permis} onChange={set("permis")} options={Q.permis} /></fieldset>
+                <fieldset><legend className="mb-3 text-lg font-semibold">Le code moto (ETM)</legend><Choice name="code" value={a.code} onChange={set("code")} options={Q.code} /></fieldset>
+                <fieldset><legend className="mb-3 text-lg font-semibold">Votre expérience</legend><Choice name="experience" value={a.experience} onChange={set("experience")} options={Q.experience} /></fieldset>
+                <fieldset><legend className="mb-3 text-lg font-semibold">Votre niveau actuel</legend><Choice name="niveau" value={a.niveau} onChange={set("niveau")} options={Q.niveau} /></fieldset>
                 <button type="button" className="btn btn-rouge" onClick={() => setStep(1)}>Continuer</button>
               </motion.div>
             )}
@@ -120,9 +120,9 @@ export function AdventureConfigurator({ prix }: { prix: { codeObtenu: number; co
                     </select>
                   </div>
                 </div>
-                <fieldset><legend className="mb-3 font-display text-2xl font-bold">Pouvez-vous vous libérer deux semaines&nbsp;?</legend><Choice name="deux" value={a.deuxSemaines} onChange={set("deuxSemaines")} options={Q.deuxSemaines} /></fieldset>
-                <fieldset><legend className="mb-3 font-display text-2xl font-bold">Hébergement</legend><Choice name="heb" value={a.hebergement} onChange={set("hebergement")} options={Q.hebergement} /></fieldset>
-                <fieldset><legend className="mb-3 font-display text-2xl font-bold">Venir au Havre</legend><Choice name="transport" value={a.transport} onChange={set("transport")} options={Q.transport} /></fieldset>
+                <fieldset><legend className="mb-3 text-lg font-semibold">Pouvez-vous vous libérer deux semaines&nbsp;?</legend><Choice name="deux" value={a.deuxSemaines} onChange={set("deuxSemaines")} options={Q.deuxSemaines} /></fieldset>
+                <fieldset><legend className="mb-3 text-lg font-semibold">Hébergement</legend><Choice name="heb" value={a.hebergement} onChange={set("hebergement")} options={Q.hebergement} /></fieldset>
+                <fieldset><legend className="mb-3 text-lg font-semibold">Venir au Havre</legend><Choice name="transport" value={a.transport} onChange={set("transport")} options={Q.transport} /></fieldset>
                 <div className="rt-field max-w-sm">
                   <label htmlFor="rt-budget">Budget global envisagé</label>
                   <select id="rt-budget" value={a.budget} onChange={(e) => set("budget")(e.target.value)}>
@@ -143,14 +143,14 @@ export function AdventureConfigurator({ prix }: { prix: { codeObtenu: number; co
                 <div className="rt-field md:col-span-2"><label htmlFor="rt-email">E-mail</label><input id="rt-email" name="email" type="email" required autoComplete="email" /></div>
                 <div className="rt-field md:col-span-2"><label htmlFor="rt-msg">Une précision ? (facultatif)</label><textarea id="rt-msg" name="message" rows={3} /></div>
                 <input type="text" name="site" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
-                <label className="flex items-start gap-3 md:col-span-2"><input type="checkbox" name="brochure" className="mt-1.5 h-4 w-4 accent-[#1e3a2f]" /> Recevoir la brochure et l'annonce des prochaines sessions</label>
+                <label className="flex items-start gap-3 md:col-span-2"><input type="checkbox" name="brochure" className="mt-1.5 h-4 w-4 accent-[#1e3a2f] h-5 w-5" /> Recevoir aussi la brochure et l'annonce des prochaines sessions</label>
                 <label className="flex items-start gap-3 text-sm text-gris md:col-span-2">
-                  <input type="checkbox" required className="mt-1 h-4 w-4 accent-[#1e3a2f]" />
+                  <input type="checkbox" required className="mt-1 h-4 w-4 accent-[#1e3a2f] h-5 w-5" />
                   J'accepte qu'Indiana Auto-Moto utilise ces informations pour répondre à ma demande. Elles ne sont ni revendues ni cédées.
                 </label>
                 <div className="flex flex-wrap gap-3 md:col-span-2">
                   <button type="button" className="btn btn-ghost" onClick={() => setStep(1)}>Retour</button>
-                  <button className="btn btn-rouge" disabled={status === "sending"}>{status === "sending" ? "Envoi en cours…" : "Envoyer ma demande"}</button>
+                  <button className="btn btn-rouge" disabled={status === "sending"}>{status === "sending" ? "Envoi en cours…" : "Recevoir mon devis personnalisé"}</button>
                 </div>
                 {status === "mailto" && <p className="text-sm text-gris md:col-span-2" role="status">Votre messagerie s'est ouverte avec la demande pré-remplie : il ne reste qu'à l'envoyer.</p>}
                 {status === "error" && <p className="text-sm text-rouge md:col-span-2" role="alert">L'envoi n'a pas abouti. Réessayez ou appelez le 02 35 41 27 06.</p>}
@@ -161,24 +161,25 @@ export function AdventureConfigurator({ prix }: { prix: { codeObtenu: number; co
       </div>
 
       <aside className="h-fit rounded-2xl bg-carbone p-6 text-sable md:p-8 lg:sticky lg:top-24" aria-live="polite">
-        <p className="font-display text-lg font-semibold text-sable/70">Notre proposition</p>
+        <p className="text-sable/70">Notre proposition</p>
         {reco.perso ? (
           <>
-            <h3 className="font-editorial mt-1 text-4xl text-white">Une demande personnalisée</h3>
+            <h3 className="mt-1 font-display text-3xl font-semibold text-white">Un devis sur mesure</h3>
             <ul className="mt-4 space-y-2 text-sable/85">{reco.reasons.map((r) => <li key={r}>{r}</li>)}</ul>
           </>
         ) : (
           <>
-            <h3 className="font-editorial mt-1 text-4xl text-white">{reco.formule.nom}</h3>
-            <p className="mt-4 flex items-baseline justify-between gap-4 border-y border-white/15 py-4">
-              <span>Formation, à partir de</span>
-              <motion.span key={reco.formule.prix} initial={{ opacity: 0.4 }} animate={{ opacity: 1 }} className="font-display text-4xl font-bold text-sunset">{euro(reco.formule.prix)}</motion.span>
-            </p>
-            <p className="mt-3 text-sable/80">Hébergement : tarif communiqué à l'ouverture des sessions.</p>
+            <h3 className="mt-1 font-display text-3xl font-semibold text-white">{reco.formule.nom}</h3>
+            <p className="mt-5 text-sm text-sable/70">Votre devis détaillera :</p>
+            <ul className="mt-2 divide-y divide-white/10 text-[.97rem]">
+              <li className="flex justify-between gap-4 py-2.5"><span>{a.code === "obtenu" ? "Formation A2" : "Formation A2 et code"}</span><motion.span key={reco.formule.prix} initial={{ opacity: 0.4 }} animate={{ opacity: 1 }} className="font-semibold text-white">{euro(reco.formule.prix)}</motion.span></li>
+              <li className="flex justify-between gap-4 py-2.5"><span>Frais d'organisation</span><span className="text-sable/75">sur devis</span></li>
+              {a.hebergement !== "aucun" && <li className="flex justify-between gap-4 py-2.5"><span>Hébergement, 13 nuits</span><span className="text-sable/75">sur devis</span></li>}
+            </ul>
           </>
         )}
         {reco.warn && <p className="mt-4 rounded-md bg-sunset/15 p-3 text-sm">{reco.warn}</p>}
-        <p className="mt-6 text-xs text-sable/60">Proposition indicative. La présentation à l'examen dépend des prérequis, de votre niveau et des places attribuées. L'obtention du permis n'est pas garantie.</p>
+        <p className="mt-6 text-xs text-sable/60">Sans engagement. La présentation à l'examen dépend des prérequis, de votre niveau et des places attribuées : l'obtention du permis n'est jamais garantie.</p>
       </aside>
     </div>
   );

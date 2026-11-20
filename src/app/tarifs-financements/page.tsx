@@ -47,7 +47,7 @@ export default function Tarifs() {
         </Container>
       </section>
 
-      <RoadTripCta title="Stage moto et séjour : la formule tout compris" text="Formation A2, hébergement et accompagnement réunis dans une seule formule de deux semaines au Havre." />
+      <RoadTripCta title="Stage moto au Havre : comment est calculé le prix ?" text="Formation A2 au tarif de l'école, frais d'organisation et hébergement en option : chaque ligne est détaillée dans votre devis." />
 
       <section className="bg-beton py-20">
         <Container>

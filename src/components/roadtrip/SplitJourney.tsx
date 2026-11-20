@@ -44,9 +44,8 @@ export function SplitJourney() {
 
   return (
     <section className="relative bg-carbone text-sable" aria-labelledby="scene-split">
-      <div className="mx-auto max-w-7xl px-5 pb-10 pt-24 lg:px-8">
-        <p className="font-display text-xl font-semibold text-sable/70">Un séjour, deux expériences</p>
-        <h2 id="scene-split" className="font-editorial mt-2 max-w-4xl text-[clamp(2.6rem,5.5vw,5rem)] text-white">Apprendre le matin. Explorer l'après-midi.</h2>
+      <div className="mx-auto max-w-7xl px-5 pb-10 pt-20 md:pt-28 lg:px-8">
+        <h2 id="scene-split" className="max-w-3xl text-[clamp(2rem,4.5vw,3.4rem)] text-white">Apprendre le matin, découvrir l'après-midi.</h2>
       </div>
 
       {/* Desktop : deux moitiés collantes, pilotées par les étapes invisibles */}
@@ -57,11 +56,11 @@ export function SplitJourney() {
               {MOMENTS.map((m, i) => <Media key={i} m={m[side].media} active={active === i} />)}
               <div className={`absolute inset-0 ${side === "learn" ? "bg-gradient-to-t from-carbone via-carbone/30 to-transparent" : "bg-gradient-to-t from-foret via-foret/20 to-transparent"}`} />
               <div className="absolute inset-x-0 bottom-0 p-10 lg:p-14">
-                <p className="font-display text-lg font-semibold text-sable/80">{side === "learn" ? "Formation" : "Découverte"}</p>
+                <p className="text-sm font-medium text-sable/75">{side === "learn" ? "Formation" : "Temps libre"}</p>
                 {MOMENTS.map((m, i) => (
                   <div key={i} className={`transition-all duration-500 ${active === i ? "translate-y-0 opacity-100" : "pointer-events-none absolute translate-y-4 opacity-0"}`} aria-hidden={active !== i}>
                     <p className="mt-1 text-sable/80">{m[side].kicker}</p>
-                    <h3 className="font-editorial text-[clamp(2.4rem,4vw,4rem)] text-white">{m[side].title}</h3>
+                    <h3 className="text-[clamp(1.8rem,3vw,2.8rem)] text-white">{m[side].title}</h3>
                     <p className="measure mt-2 text-lg text-sable/90">{m[side].text}</p>
                   </div>
                 ))}
@@ -87,7 +86,7 @@ export function SplitJourney() {
                 <div className="absolute inset-0 bg-gradient-to-t from-carbone/90 to-transparent" />
                 <div className="absolute inset-x-0 bottom-0 p-3">
                   <p className="text-xs text-sable/80">{m[side].kicker}</p>
-                  <h3 className="font-editorial text-2xl text-white">{m[side].title}</h3>
+                  <h3 className="text-xl text-white">{m[side].title}</h3>
                 </div>
               </div>
             ))}

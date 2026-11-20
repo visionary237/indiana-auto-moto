@@ -12,6 +12,8 @@ export const metadata: Metadata = {
   description:
     "Indiana Auto-Moto, l'école des motards au Havre : permis B, conduite accompagnée, permis moto A1, A2, maxi scooter, stages et formations accélérées. CPF accepté.",
   formatDetection: { telephone: true },
+  // Environnement de test (GitHub Pages) : non indexé tant que le domaine officiel n'est pas branché.
+  robots: process.env.NEXT_PUBLIC_NOINDEX === "true" ? { index: false, follow: false } : undefined,
 };
 
 export const viewport: Viewport = { themeColor: "#1d2125" };
