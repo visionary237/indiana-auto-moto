@@ -22,7 +22,6 @@ Les points à valider sont listés dans `AUDIT.md`.
 | `/permis-moto/` | A1, A2, maxi scooter, piste |
 | `/formations-accelerees/` | Permis B accéléré |
 | `/stages/` | 125 cm³ / passerelle A, AM, novice, BVA vers BM |
-| `/indiana-driving-escape/` | Landing du séjour (projet) : configurateur, qualification, devis |
 | `/equipe/` | Équipe, matériel, méthode, certifications |
 | `/tarifs-financements/` | Tous les tarifs, CPF, paiement fractionné |
 | `/faq/` | FAQ (JSON-LD FAQPage) |

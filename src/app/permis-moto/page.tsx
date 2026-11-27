@@ -32,14 +32,14 @@ export default function PermisMoto() {
         <Link href="/contact/?formation=moto-a2" className="btn btn-rouge">Demander mon inscription</Link>
       </PageHero>
 
-      <section className="bg-asphalt py-20 text-marquage">
+      <section className="bg-[#e8f0ef] py-20">
         <Container>
-          <SectionTitle light title={piste.headline} intro={piste.body} />
+          <SectionTitle title={piste.headline} intro={piste.body} />
           <TrackSlalom />
           <div className="mt-12 grid gap-10 md:grid-cols-2">
             <div>
               <h3 className="text-3xl">Ce que vous y travaillez</h3>
-              <ul className="mt-4 space-y-2 text-marquage/80">
+              <ul className="mt-4 space-y-2 text-asphalt/80">
                 <li>Maniabilité à allure lente, avec et sans passager</li>
                 <li>Slalom, évitement et freinage d'urgence à allure plus soutenue</li>
                 <li>Interrogation orale sur les 12 thèmes de l'examen</li>

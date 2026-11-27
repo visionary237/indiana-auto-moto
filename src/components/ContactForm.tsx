@@ -54,7 +54,7 @@ export function ContactForm() {
             <select id="formation" name="formation" value={formation} onChange={(e) => setFormation(e.target.value)} required>
               <option value="">Choisir…</option>
               {options.map((o) => <option key={o.slug} value={o.slug}>{o.name}</option>)}
-              <option value="driving-escape">Indiana Driving Escape (séjour)</option>
+              <option value="stage-moto-normandie">Stage moto en Normandie (2 semaines)</option>
               <option value="autre">Je ne sais pas encore</option>
             </select>
           </div>

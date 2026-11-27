@@ -8,6 +8,7 @@ import { faqJsonLd } from "@/lib/seo";
 export type GuideSection = { h: string; body: ReactNode };
 
 const GUIDES = [
+  { href: "/permis-moto-accelere/", label: "Le permis moto accéléré : les options" },
   { href: "/guides/permis-moto-en-deux-semaines/", label: "Passer son permis moto en deux semaines" },
   { href: "/guides/prix-stage-permis-moto-hebergement/", label: "Prix d'un stage de permis moto avec hébergement" },
   { href: "/guides/permis-moto-depuis-paris/", label: "Passer son permis moto en venant de Paris" },

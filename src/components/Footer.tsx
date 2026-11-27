@@ -39,7 +39,7 @@ export function Footer() {
             {nav.map((n) => (
               <li key={n.href}><Link className="text-marquage/75 hover:text-marquage" href={n.href}>{n.label}</Link></li>
             ))}
-            <li><Link className="text-marquage/75 hover:text-marquage" href="/indiana-driving-escape/">Driving Escape (séjour auto)</Link></li>
+            <li><Link className="text-marquage/75 hover:text-marquage" href="/permis-moto-accelere/">Permis moto accéléré</Link></li>
             <li><Link className="text-marquage/75 hover:text-marquage" href="/guides/permis-moto-en-deux-semaines/">Guide : le permis moto en deux semaines</Link></li>
             <li><Link className="text-marquage/75 hover:text-marquage" href="/contact/">Contact et inscription</Link></li>
           </ul>

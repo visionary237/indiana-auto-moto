@@ -30,14 +30,14 @@ export default function Home() {
               { href: "/permis-auto/", title: "Permis auto", img: asset("/images/lecon-auto.jpg"), alt: "Une élève au volant avec son enseignant de la conduite", from: auto.price, desc: "Boîte manuelle ou automatique, conduite accompagnée dès 15 ans, passerelle vers la boîte manuelle." },
               { href: "/permis-moto/", title: "Permis moto", img: asset("/images/plateau-moto.jpg"), alt: "Un élève motard sur une piste de maniabilité balisée", from: packs.find((p) => p.slug === "moto-a1")!.price, desc: "A1, A2, A2 maxi scooter, passerelle A2 vers A et permis AM, avec une Yamaha MT-03 dans la flotte." },
             ].map((c) => (
-              <Link key={c.href} href={c.href} className="group relative block overflow-hidden rounded-md bg-asphalt text-marquage">
+              <Link key={c.href} href={c.href} className="group relative block overflow-hidden rounded-[24px] bg-asphalt text-marquage">
                 <div className="relative aspect-[16/10]">
                   <Image src={c.img} alt={c.alt} fill sizes="(min-width:768px) 50vw, 100vw" className="object-cover opacity-80 transition-transform duration-700 group-hover:scale-[1.03]" />
                   <div className="absolute inset-0 bg-gradient-to-t from-asphalt via-asphalt/30 to-transparent" />
                 </div>
                 <div className="absolute inset-x-0 bottom-0 p-6 md:p-8">
                   <p className="font-semibold text-marquage/80">à partir de {euro(c.from)} TTC</p>
-                  <h3 className="text-5xl md:text-6xl">{c.title}</h3>
+                  <h3 className="text-4xl md:text-5xl">{c.title}</h3>
                   <p className="measure mt-2 text-marquage/80">{c.desc}</p>
                   <span className="mt-4 inline-block border-b-2 border-rouge pb-0.5 font-display text-xl font-bold">Voir les formations</span>
                 </div>
@@ -48,13 +48,13 @@ export default function Home() {
       </section>
 
       {/* L'argument fort : la piste */}
-      <section className="bg-asphalt py-20 text-marquage" aria-labelledby="piste-titre">
+      <section className="bg-[#e8f0ef] py-20" aria-labelledby="piste-titre">
         <Container>
           <div className="grid gap-10 lg:grid-cols-[1fr_1.1fr] lg:items-end">
             <div>
-              <h2 id="piste-titre" className="text-[clamp(2.6rem,5vw,4.6rem)]">{piste.headline}</h2>
+              <h2 id="piste-titre" className="text-[clamp(2rem,4.2vw,3.4rem)]">{piste.headline}</h2>
             </div>
-            <p className="measure text-lg text-marquage/80">{piste.body}</p>
+            <p className="measure text-lg text-asphalt/75">{piste.body}</p>
           </div>
           <div className="mt-12">
             <TrackSlalom />
@@ -63,8 +63,8 @@ export default function Home() {
             {piste.facts.map((f) => (
               <div key={f.label} className="border-l-4 border-rouge pl-5">
                 <dt className="sr-only">{f.label}</dt>
-                <dd className="font-display text-5xl font-bold">{f.value}</dd>
-                <dd className="text-marquage/70">{f.label}</dd>
+                <dd className="font-display text-4xl font-semibold">{f.value}</dd>
+                <dd className="text-asphalt/70">{f.label}</dd>
               </div>
             ))}
           </dl>
@@ -85,21 +85,21 @@ export default function Home() {
         <Container>
           <SectionTitle title="Pressé, déjà titulaire, ou envie d'ailleurs ?" />
           <div className="grid gap-6 lg:grid-cols-3">
-            <Link href="/formations-accelerees/" className="group rounded-md bg-white p-7 hover:outline hover:outline-2 hover:outline-asphalt">
+            <Link href="/formations-accelerees/" className="group rounded-[24px] bg-white p-7 ring-2 ring-transparent hover:ring-carbone">
               <p className="font-display text-5xl font-bold text-rouge">{euro(packs.find((p) => p.slug === "auto-accelere")!.price)}</p>
               <h3 className="mt-3 text-3xl">Permis B accéléré</h3>
               <p className="mt-2 text-asphalt/75">20 heures de conduite planifiées sur une période resserrée, finançable par le CPF sous conditions.</p>
             </Link>
-            <Link href="/stages/" className="group rounded-md bg-white p-7 hover:outline hover:outline-2 hover:outline-asphalt">
+            <Link href="/stages/" className="group rounded-[24px] bg-white p-7 ring-2 ring-transparent hover:ring-carbone">
               <p className="font-display text-5xl font-bold text-rouge">dès {euro(Math.min(...stages.map((s) => s.price)))}</p>
               <h3 className="mt-3 text-3xl">Stages et perfectionnement</h3>
               <p className="mt-2 text-asphalt/75">Formation 125 cm³, passerelle A2 vers A, permis AM, stage jeune conducteur, passage en boîte manuelle.</p>
             </Link>
-            <Link href="/indiana-driving-escape/" className="group relative overflow-hidden rounded-md bg-manche p-7 text-marquage hover:outline hover:outline-2 hover:outline-asphalt">
-              <p className="inline-block rounded-sm bg-white/15 px-2 py-0.5 text-sm font-semibold">Projet en préparation</p>
-              <h3 className="mt-3 text-3xl">Indiana Driving Escape</h3>
-              <p className="mt-2 text-marquage/80">Deux semaines au Havre pour se former intensivement, entre leçons, mer et falaises. Un projet pensé pour les Franciliens.</p>
-              <span className="mt-4 inline-block border-b-2 border-marquage pb-0.5 font-display text-xl font-bold">Configurer mon séjour</span>
+            <Link href="/stage-moto-normandie/" className="group relative overflow-hidden rounded-[24px] bg-foret p-7 text-white ring-2 ring-transparent hover:ring-carbone">
+              <p className="inline-block rounded-full bg-sunset px-3 py-0.5 text-sm font-semibold text-carbone">Nouveau</p>
+              <h3 className="mt-3 text-3xl">Stage moto en Normandie</h3>
+              <p className="mt-2 text-white/80">Deux semaines au Havre pour passer le permis A2, la côte normande à découvrir entre deux leçons.</p>
+              <span className="mt-4 inline-block font-semibold underline underline-offset-4">Prendre la route</span>
             </Link>
           </div>
         </Container>

@@ -52,3 +52,20 @@ Les prompts sont rédigés pour Gemini (Veo / Imagen) et Higgsfield. Ajouter sys
 | RT-B01 | Brochure PDF Road Trip | Automatisation « envoi de brochure » | PDF A4, 8 pages |
 | RT-B02 | Visuels Travel Pass (carte Wallet) | Indiana Travel Pass | PNG 1032×336 (strip Apple), logo 480×150 |
 | RT-S01 | Déclinaisons réseaux sociaux | Campagnes Meta / TikTok | 1080×1920 vidéo, 1080×1350 image |
+
+## 3. Prompts Higgsfield : campagne « Mettez Paris dans le rétro » (27/11/2026)
+
+À ajouter à chaque prompt : « no text, no logo, no watermark, no brand names, riders wear full certified gear (full-face helmet, gloves, jacket, trousers, boots), both hands on handlebars, legal speed ». Formats : 16:9 (1920×1080) pour l'ordinateur et 9:16 (1080×1920) pour le mobile et les réseaux.
+
+| ID | Usage sur le site | Durée | Prompt |
+|---|---|---|---|
+| HF-01 | Fond du premier écran, en remplacement ou en complément de la 3D | 10 s, boucle | Cinematic drone shot following a single motorcyclist on a narrow winding road along white chalk cliffs of Normandy at golden hour, sea on the right, warm orange sky, slow forward motion, anamorphic lens flare, film grain, 24 fps |
+| HF-02 | Transition « la ville s'efface » | 6 s | Seamless match cut: rainy Paris ring road traffic jam seen from a motorcycle helmet point of view, wipers and red brake lights, transitions into the same point of view on an empty sunny countryside road in Normandy with hedgerows, morning light |
+| HF-03 | Carte « Partir. » | 6 s, boucle | Young woman in her twenties, motorcycle jacket, helmet in hand, standing on the clifftop path above Étretat at sunset, wind in her hair, looking at the sea, calm and free, shallow depth of field, handheld documentary style |
+| HF-04 | Carte « + Apprendre à piloter. » | 8 s, boucle | Learner rider on a red A2 roadster doing a slow figure-eight between orange cones on an asphalt training ground, instructor in a high-visibility vest giving a thumbs up, overcast soft light, low tracking shot at wheel height |
+| HF-05 | Carte « + Ne rien organiser. » | 6 s | Bright guest room with wooden beams and large windows opening onto green Normandy fields, a motorcycle helmet and gloves resting on the bed, a backpack by the door, morning sunlight, slow dolly-in |
+| HF-06 | Carte « + Découvrir la côte. » | 6 s | Two motorcycle learners in their twenties, helmets on the table, laughing at a harbour café terrace in Honfleur with colourful facades and sailboats, late afternoon light, no alcohol visible |
+| HF-07 | Bandeau tampon final « Destination Le Havre » | 4 s | Close-up of a vintage-style travel passport page receiving an orange ink stamp shaped like a motorcycle with the number 76, satisfying slow motion, warm paper texture, shallow depth of field |
+| HF-08 | Réseaux sociaux, format 9:16 | 12 s | Vertical fast-cut travel montage: Paris metro crowd, train window with Normandy fields passing, helmet buckle click, cones on training ground, rider leaning gently into a coastal bend, sunset on chalk cliffs, ending on an empty road toward the sea |
+
+Rappels : les personnes générées ne doivent jamais être présentées comme de vrais élèves ou moniteurs d'Indiana ; les légender « images d'illustration ». Pour la preuve sociale, seuls les vrais stagiaires comptent (témoignages vidéo, section « Ils sont partis »).

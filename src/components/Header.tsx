@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { Logo } from "./Logo";
+import { SoundToggle } from "./SoundFx";
 import { nav, school } from "@/lib/content";
 
 export function Header() {
@@ -46,7 +47,7 @@ export function Header() {
                     <Link
                       href={item.href}
                       aria-current={active ? "page" : undefined}
-                      className={`rounded-full px-3 py-2 text-[.95rem] font-medium transition-colors ${
+                      className={`whitespace-nowrap rounded-full px-2.5 py-2 text-[.92rem] font-medium transition-colors ${
                         featured ? "bg-foret text-sable hover:bg-foret-light" : active ? "bg-beton text-asphalt" : "text-asphalt/80 hover:bg-beton hover:text-asphalt"
                       }`}
                     >
@@ -58,8 +59,9 @@ export function Header() {
             </ul>
           </nav>
 
-          <div className="flex shrink-0 items-center gap-2">
-            <a href={school.phoneHref} className="hidden text-[.95rem] font-semibold lg:inline-block">{school.phone}</a>
+          <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
+            <SoundToggle className="text-asphalt hover:bg-beton" />
+            <a href={school.phoneHref} className="hidden whitespace-nowrap text-[.95rem] font-semibold lg:inline-block xl:hidden 2xl:inline-block">{school.phone}</a>
             <Link href="/contact/" className="btn btn-rouge hidden !py-2.5 md:inline-flex">S'inscrire</Link>
             <button
               ref={btn}

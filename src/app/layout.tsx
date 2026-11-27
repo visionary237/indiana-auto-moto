@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { SoundFx } from "@/components/SoundFx";
 import { JsonLd } from "@/components/ui";
 import { localBusinessJsonLd } from "@/lib/seo";
 import { SITE_URL } from "@/lib/content";
@@ -29,6 +30,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Header />
         <main id="contenu">{children}</main>
         <Footer />
+        <SoundFx />
       </body>
     </html>
   );

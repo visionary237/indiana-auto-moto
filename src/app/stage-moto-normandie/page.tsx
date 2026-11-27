@@ -1,16 +1,19 @@
 import Image from "next/image";
 import Link from "next/link";
-import { VideoBackdrop } from "@/components/roadtrip/VideoBackdrop";
+import { CoastRoad3D } from "@/components/roadtrip/CoastRoad3D";
+import { StackedReasons } from "@/components/roadtrip/StackedReasons";
 import { SplitJourney } from "@/components/roadtrip/SplitJourney";
 import { Timeline14 } from "@/components/roadtrip/Timeline14";
 import { ExploreMap } from "@/components/roadtrip/ExploreMap";
 import { Comparator } from "@/components/roadtrip/Comparator";
 import { PriceBuilder } from "@/components/roadtrip/PriceBuilder";
-import { AdventureConfigurator } from "@/components/roadtrip/AdventureConfigurator";
+import { QuickQuote } from "@/components/roadtrip/QuickQuote";
 import { MiniLeadForm } from "@/components/roadtrip/MiniLeadForm";
 import { LandingNav } from "@/components/roadtrip/LandingNav";
+import { Proofs } from "@/components/roadtrip/Proofs";
+import { Etape, JourneyCta, JourneyHud } from "@/components/roadtrip/Journey";
 import { Accordion } from "@/components/Accordion";
-import { Container, JsonLd, Reviews } from "@/components/ui";
+import { Container, JsonLd } from "@/components/ui";
 import { euro, school, SITE_URL } from "@/lib/content";
 import { composantes, destinations, hebergements, mapPoints, MISE_A_JOUR, partenaires, prixCode, prixFormationA2, programme, ROADTRIP_PATH, sessions } from "@/lib/roadtrip";
 import { faqJsonLd, pageMeta } from "@/lib/seo";
@@ -19,7 +22,7 @@ import { asset } from "@/lib/asset";
 export const metadata = pageMeta({
   title: "Stage permis moto intensif en Normandie : deux semaines au Havre",
   description:
-    "Stage intensif de permis moto A2 au Havre : deux semaines de formation avec moniteur, hébergement en option, à 2 h 10 de Paris en train. Prix détaillé et devis personnalisé.",
+    "Stage intensif de permis moto A2 au Havre : deux semaines de formation avec moniteur, logement en option, la côte normande à découvrir, à 2 h 10 de Paris. Prix détaillé et devis personnalisé.",
   path: ROADTRIP_PATH,
 });
 
@@ -37,11 +40,21 @@ const faq = [
 ];
 
 const ETAPES = [
-  { t: "Vous demandez un devis", d: "Deux minutes en ligne : votre permis visé, vos dates, vos besoins de logement." },
+  { t: "Vous demandez un devis", d: "Une minute : votre permis, votre période, logement ou non." },
   { t: "On vous rappelle", d: "Un échange court pour vérifier les prérequis et votre niveau." },
-  { t: "Vous recevez votre devis", d: "Chaque ligne détaillée : formation, organisation, hébergement." },
-  { t: "Vous préparez le départ", d: "Dossier, code moto, équipement : on vous guide jusqu'au premier jour." },
+  { t: "Vous recevez votre devis", d: "Chaque ligne détaillée : formation, organisation, logement." },
+  { t: "Vous partez", d: "Dossier, code, équipement : on vous guide jusqu'au premier jour." },
 ];
+
+/** Borne kilométrique en tête de chaque étape du voyage. */
+function Borne({ km, lieu, light = false }: { km: number; lieu: string; light?: boolean }) {
+  return (
+    <p className={`inline-flex items-center gap-3 text-sm font-medium ${light ? "text-white/80" : "text-carbone/60"}`}>
+      <span className="grid h-11 w-11 place-items-center rounded-b-md rounded-t-full border-2 border-carbone bg-white font-display text-[13px] font-bold text-carbone">{km}</span>
+      km : {lieu}
+    </p>
+  );
+}
 
 export default function StageMotoNormandie() {
   const jsonld = {
@@ -58,235 +71,171 @@ export default function StageMotoNormandie() {
   };
 
   return (
-    <div className="bg-marquage pb-20 text-carbone md:pb-0">
+    <div className="bg-marquage pb-24 text-carbone lg:pb-0">
       <JsonLd data={jsonld} />
       <JsonLd data={faqJsonLd(faq)} />
+      <JourneyHud />
 
-      {/* 1. Premier écran : bénéfice, durée, lieu, un seul appel à l'action */}
-      <section className="relative overflow-hidden bg-carbone text-white" aria-labelledby="titre">
-        <VideoBackdrop src={asset("/videos/route-normandie.mp4")} poster={asset("/images/roadtrip/route-normandie-poster.jpg")} label="Un motard roule sur une route de campagne normande" />
-        <div className="absolute inset-0 bg-gradient-to-t from-carbone/95 via-carbone/55 to-carbone/25 md:bg-gradient-to-r" />
-        <Container className="relative z-10 flex min-h-[calc(100svh-4rem)] flex-col justify-end pb-12 pt-24 md:min-h-[82vh] md:justify-center md:pb-20">
-          <h1 id="titre" className="max-w-3xl text-[clamp(2.4rem,6.4vw,5rem)]">Deux semaines au Havre pour passer votre permis moto.</h1>
-          <p className="mt-5 max-w-xl text-lg text-white/85 md:text-xl">
-            Un stage intensif A2 avec moniteur, à 2 h 10 de Paris en train. Vous vous formez, nous organisons le reste.
+      {/* KM 0 : la route en 3D, la promesse */}
+      <Etape id="depart" stamp="depart" km={0} label="Départ" className="relative overflow-hidden bg-[#e88a55] text-white">
+        <Image src={asset("/images/roadtrip/route-normandie-poster.jpg")} alt="" fill priority sizes="100vw" className="object-cover" />
+        <CoastRoad3D />
+        <div className="absolute inset-0 bg-gradient-to-t from-carbone via-carbone/70 to-carbone/0 md:bg-gradient-to-r md:from-carbone/80 md:via-carbone/30 md:to-transparent" />
+        <Container className="relative z-10 flex min-h-[calc(100svh-4rem)] flex-col justify-end pb-12 pt-20 md:justify-center md:pb-20">
+          <Borne km={0} lieu="Paris, porte Maillot" light />
+          <h1 className="mt-5 max-w-3xl text-[clamp(2.8rem,7.5vw,6rem)] leading-[0.98]">Mettez Paris dans le rétro.</h1>
+          <p className="mt-5 max-w-xl text-lg text-white/90 md:text-xl">
+            Deux semaines au Havre pour passer votre permis moto A2 : un moniteur, la mer à deux pas, et tout organisé pour vous.
           </p>
           <dl className="mt-8 grid max-w-2xl grid-cols-2 gap-x-6 gap-y-4 sm:grid-cols-4">
-            {[["Durée", "2 semaines"], ["Lieu", "Le Havre"], ["Permis", "A2, dès 18 ans"], ["Logement", "En option"]].map(([k, v]) => (
-              <div key={k}><dt className="text-sm text-white/60">{k}</dt><dd className="font-semibold">{v}</dd></div>
+            {[["Durée", "2 semaines"], ["Depuis Paris", "2 h 10 en train"], ["Permis", "A2, dès 18 ans"], ["Logement", "En option"]].map(([k, v]) => (
+              <div key={k}><dt className="text-sm text-white/65">{k}</dt><dd className="font-semibold">{v}</dd></div>
             ))}
           </dl>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-            <a href="#devis" className="btn btn-sunset">Recevoir mon devis personnalisé</a>
-            <a href="#le-stage" className="px-2 py-2 text-center font-medium text-white/85 underline-offset-4 hover:underline">Comment ça marche</a>
+          <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <a href="#pourquoi" className="btn btn-sunset" data-rev-strong>Prendre la route</a>
+            <a href="#devis" className="px-2 py-2 text-center font-medium text-white underline-offset-4 hover:underline" data-silent>Aller directement au devis</a>
           </div>
-          <p className="mt-6 max-w-xl text-sm text-white/60">Présentation à l'examen en fin de stage selon votre niveau, les prérequis et les places attribuées. Le permis n'est jamais garanti.</p>
+          <p className="mt-7 max-w-xl text-sm text-white/65">Examen visé en fin de stage selon votre niveau, les prérequis et les places attribuées. Le permis n'est jamais garanti.</p>
         </Container>
-      </section>
+      </Etape>
 
       <LandingNav />
 
-      {/* 2. Le stage : bénéfices et processus */}
-      <section id="le-stage" className="scroll-mt-28 py-20 md:py-28">
+      {/* KM 40 : les bénéfices qui s'additionnent */}
+      <Etape id="pourquoi" stamp="aventure" km={40} label="Pourquoi partir" className="py-16 md:py-24">
         <Container>
-          <h2 className="max-w-3xl text-[clamp(2rem,4.5vw,3.4rem)]">Moins d'attente, moins d'allers-retours, un seul objectif.</h2>
-          <div className="mt-12 grid gap-10 md:grid-cols-3">
-            {[
-              { t: "Vous gagnez du temps", d: "Vos 20 heures de conduite sont regroupées sur deux semaines, au lieu de s'étaler sur des mois." },
-              { t: "Tout est organisé", d: "Planning des leçons, logement si besoin, dossier d'inscription : vous n'avez qu'à venir." },
-              { t: "Vous êtes accompagné", d: "Une école agréée, reconnue par les motards, et un moniteur qui adapte le rythme à vos progrès." },
-            ].map((x) => (
-              <div key={x.t}>
-                <h3 className="text-2xl">{x.t}</h3>
-                <p className="mt-2 text-carbone/70">{x.d}</p>
-              </div>
-            ))}
-          </div>
+          <Borne km={40} lieu="la ville s'efface" />
+          <h2 className="mt-5 max-w-3xl text-[clamp(2.2rem,5vw,3.8rem)]">Un stage qui s'additionne.</h2>
+          <p className="mt-4 max-w-xl text-lg text-carbone/70">Faites défiler : chaque raison s'ajoute à la précédente.</p>
+          <div className="mt-10"><StackedReasons /></div>
+        </Container>
+      </Etape>
 
-          <h3 className="mt-20 text-[clamp(1.6rem,3vw,2.2rem)]">Comment ça marche</h3>
-          <ol className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {/* KM 90 : comment ça se passe */}
+      <Etape id="deroulement" km={90} label="Le stage" className="py-16 md:py-24">
+        <Container>
+          <Borne km={90} lieu="mi-chemin" />
+          <h2 className="mt-5 max-w-3xl text-[clamp(2.2rem,5vw,3.8rem)]">De votre canapé au guidon, en quatre étapes.</h2>
+          <ol className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {ETAPES.map((e, i) => (
-              <li key={e.t} className="rounded-2xl bg-white p-6">
-                <span className="grid h-9 w-9 place-items-center rounded-full bg-sunset font-semibold text-carbone">{i + 1}</span>
+              <li key={e.t} className="rounded-[24px] bg-white p-6">
+                <span className="grid h-10 w-10 place-items-center rounded-full bg-carbone font-semibold text-white">{i + 1}</span>
                 <p className="mt-4 text-lg font-semibold">{e.t}</p>
                 <p className="mt-1 text-carbone/70">{e.d}</p>
               </li>
             ))}
           </ol>
-          <a href="#devis" className="btn btn-rouge mt-10">Recevoir mon devis personnalisé</a>
+          <h3 className="mt-20 text-[clamp(1.7rem,3.4vw,2.6rem)]">Et sur place, vos quatorze jours</h3>
+          <p className="mt-2 max-w-2xl text-carbone/70">Un programme type, ajusté après votre évaluation du premier jour.</p>
+          <div className="mt-8"><Timeline14 jours={programme} /></div>
         </Container>
-      </section>
+      </Etape>
 
-      {/* 3. Apprendre et découvrir */}
       <SplitJourney />
 
-      {/* 4. Prix transparent + comparateur à périmètre égal */}
-      <section id="prix" className="scroll-mt-28 bg-sable py-20 md:py-28">
+      {/* KM 150 : la côte */}
+      <Etape id="region" stamp="decouverte" km={150} label="La côte" className="bg-[#e8f0ef] py-16 md:py-24">
         <Container>
-          <h2 className="max-w-3xl text-[clamp(2rem,4.5vw,3.4rem)]">Combien coûte le stage&nbsp;?</h2>
-          <p className="mt-4 max-w-2xl text-lg text-carbone/75">
-            Le prix de la formation est fixe. Les frais d'organisation et l'hébergement dépendent de vos choix : ils sont chiffrés dans votre devis, ligne par ligne.
-          </p>
-          <div className="mt-10"><PriceBuilder composantes={composantes} /></div>
-          <p className="mt-4 text-sm text-carbone/60">Tarifs TTC de l'école au {dateMaj}. Le passage des épreuves pratiques du permis est gratuit. <Link href="/tarifs-financements/" className="underline underline-offset-2">Tous les tarifs de l'école</Link></p>
-
-          <div id="comparer" className="mt-24 scroll-mt-28">
-            <h2 className="max-w-3xl text-[clamp(1.8rem,3.6vw,2.8rem)]">Comparer avec une formation près de chez vous</h2>
-            <p className="mt-3 max-w-2xl text-carbone/75">On compare à périmètre égal : la formation seule, puis le temps et les trajets. Le calcul n'utilise que vos chiffres et le tarif de l'école.</p>
-            <div className="mt-8"><Comparator formationIndiana={prixFormationA2} /></div>
-          </div>
-        </Container>
-      </section>
-
-      {/* 5. Programme et logement */}
-      <section id="programme" className="scroll-mt-28 py-20 md:py-28">
-        <Container>
-          <h2 className="max-w-3xl text-[clamp(2rem,4.5vw,3.4rem)]">Comment se passent les deux semaines&nbsp;?</h2>
-          <p className="mt-4 max-w-2xl text-lg text-carbone/75">Un programme type, ajusté après votre évaluation du premier jour.</p>
-          <div className="mt-10"><Timeline14 jours={programme} /></div>
-
-          <div className="mt-24 grid gap-10 lg:grid-cols-2 lg:items-center">
-            <div>
-              <h2 className="text-[clamp(1.8rem,3.6vw,2.8rem)]">Où dormir pendant le stage&nbsp;?</h2>
-              {hebergements.length === 0 ? (
-                <>
-                  <p className="mt-4 max-w-xl text-lg text-carbone/75">Un hébergement vous est proposé en option, près de l'école. Les logements partenaires sont en cours de sélection : seuls les lieux sous contrat seront présentés, avec leurs vraies photos.</p>
-                  <p className="mt-4 max-w-xl text-carbone/75">Vous préférez vous organiser seul ? Le stage se réserve aussi sans hébergement.</p>
-                </>
-              ) : (
-                <ul className="mt-6 space-y-4">
-                  {hebergements.map((h) => (
-                    <li key={h.id} className="rounded-2xl bg-white p-6">
-                      <p className="text-xl font-semibold">{h.nom}</p>
-                      <p className="text-carbone/70">{h.localisation}, {h.distance_ecole} de l'école. {h.type_chambre}.</p>
-                      <p className="mt-2 text-sm text-carbone/70">Inclus : {h.inclus.join(", ")}. Non inclus : {h.non_inclus.join(", ")}.</p>
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </div>
-            <figure>
-              <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
-                <Image src={asset("/images/roadtrip/hebergement-illustration.jpg")} alt="Séjour lumineux ouvert sur la campagne" fill sizes="(min-width:1024px) 45vw, 100vw" className="object-cover" />
-              </div>
-              <figcaption className="mt-2 text-sm text-carbone/55">Photo d'ambiance, non contractuelle.</figcaption>
-            </figure>
-          </div>
-        </Container>
-      </section>
-
-      {/* 6. Région, accès et adresses */}
-      <section id="region" className="scroll-mt-28 bg-[#e8f0ef] py-20 md:py-28">
-        <Container>
-          <h2 className="max-w-3xl text-[clamp(2rem,4.5vw,3.4rem)]">Que faire autour du Havre&nbsp;?</h2>
-          <p className="mt-4 max-w-2xl text-lg text-carbone/75">Entre deux leçons, la côte est à vous. Les sorties sont libres et à votre charge&nbsp;; pendant la formation, vous ne roulez qu'en leçon.</p>
+          <Borne km={150} lieu="premiers embruns" />
+          <h2 className="mt-5 max-w-3xl text-[clamp(2.2rem,5vw,3.8rem)]">Votre terrain de jeu, entre deux leçons.</h2>
+          <p className="mt-4 max-w-2xl text-lg text-carbone/70">Touchez une destination sur la carte. Les sorties sont libres et à votre charge ; pendant la formation, vous ne roulez qu'en leçon.</p>
           <div className="mt-10 [&_.rt-chip]:text-carbone"><ExploreMap destinations={destinations} lieux={mapPoints()} /></div>
 
-          <div className="mt-20 grid gap-6 md:grid-cols-2">
-            <div className="rounded-2xl bg-white p-6 md:p-8">
-              <h2 className="text-2xl md:text-3xl">Comment venir depuis Paris&nbsp;?</h2>
-              <ul className="mt-4 space-y-3 text-carbone/80">
-                <li><strong className="text-carbone">En train :</strong> TER directs depuis Paris Saint-Lazare, environ 2 h 10 jusqu'à la gare du Havre.</li>
-                <li><strong className="text-carbone">En voiture :</strong> un peu plus de deux heures par l'A13.</li>
-                <li><strong className="text-carbone">Sur place :</strong> l'école est au {school.address.street}, {school.address.city}.</li>
-              </ul>
-            </div>
-            <div className="rounded-2xl bg-white p-6 md:p-8">
-              <h2 className="text-2xl md:text-3xl">Nos adresses partenaires</h2>
-              {partenaires.length === 0 ? (
-                <p className="mt-4 text-carbone/75">Restaurants, activités, loueurs : le réseau se constitue. Les avantages réservés aux stagiaires seront indiqués uniquement une fois signés.</p>
+          <div className="mt-16 grid gap-6 md:grid-cols-2">
+            <div className="rounded-[24px] bg-white p-6 md:p-8">
+              <h3 className="text-2xl">Où dormir&nbsp;?</h3>
+              {hebergements.length === 0 ? (
+                <p className="mt-3 text-carbone/75">Un logement vous est proposé en option, près de l'école. Les adresses partenaires sont en cours de sélection : seuls les lieux sous contrat seront présentés, avec leurs vraies photos. Le stage se réserve aussi sans logement.</p>
               ) : (
-                <ul className="mt-4 space-y-2">{partenaires.map((p) => <li key={p.id}><strong>{p.nom}</strong>, {p.ville}{p.avantage && p.avantage_confirme ? ` : ${p.avantage}` : ""}</li>)}</ul>
+                <ul className="mt-3 space-y-2">{hebergements.map((h) => <li key={h.id}><strong>{h.nom}</strong>, {h.distance_ecole} de l'école. {h.type_chambre}.</li>)}</ul>
               )}
-              <details className="mt-5">
-                <summary className="cursor-pointer font-semibold text-foret">Vous tenez un établissement en Normandie&nbsp;?</summary>
-                <div className="mt-4">
-                  <MiniLeadForm tone="light" kind="Stage moto Normandie : candidature partenaire" stage="Partenaire à contacter" cta="Proposer mon établissement" done="Merci, nous revenons vers vous." fields={[{ name: "etab", label: "Établissement", required: true }, { name: "email", label: "E-mail", type: "email", required: true }]} />
-                </div>
-              </details>
             </div>
+            <div className="rounded-[24px] bg-white p-6 md:p-8">
+              <h3 className="text-2xl">Venir depuis Paris</h3>
+              <ul className="mt-3 space-y-2 text-carbone/80">
+                <li><strong className="text-carbone">Train :</strong> TER directs depuis Saint-Lazare, environ 2 h 10.</li>
+                <li><strong className="text-carbone">Voiture :</strong> un peu plus de deux heures par l'A13.</li>
+                <li><strong className="text-carbone">L'école :</strong> {school.address.street}, {school.address.city}.</li>
+              </ul>
+              {partenaires.length === 0 && (
+                <details className="mt-5">
+                  <summary className="cursor-pointer text-sm font-semibold text-foret">Vous tenez un établissement en Normandie ? Rejoignez nos adresses</summary>
+                  <div className="mt-4"><MiniLeadForm tone="light" kind="Stage moto Normandie : candidature partenaire" stage="Partenaire à contacter" cta="Proposer mon établissement" done="Merci, nous revenons vers vous." fields={[{ name: "etab", label: "Établissement", required: true }, { name: "email", label: "E-mail", type: "email", required: true }]} /></div>
+                </details>
+              )}
+            </div>
+          </div>
+        </Container>
+      </Etape>
+
+      {/* KM 175 : le prix */}
+      <Etape id="prix" stamp="budget" km={175} label="Prix" className="bg-sable py-16 md:py-24">
+        <Container>
+          <Borne km={175} lieu="le pont de Normandie en vue" />
+          <h2 className="mt-5 max-w-3xl text-[clamp(2.2rem,5vw,3.8rem)]">Combien coûte le voyage&nbsp;?</h2>
+          <p className="mt-4 max-w-2xl text-lg text-carbone/75">La formation a un prix fixe. L'organisation et le logement dépendent de vos choix : ils sont chiffrés dans votre devis, ligne par ligne.</p>
+          <div className="mt-10"><PriceBuilder composantes={composantes} /></div>
+          <p className="mt-4 text-sm text-carbone/60">Tarifs TTC de l'école au {dateMaj}. Le passage des épreuves pratiques du permis est gratuit. <Link href="/tarifs-financements/" className="underline underline-offset-2">Tous les tarifs</Link></p>
+          <details id="comparer" className="mt-10 scroll-mt-28 rounded-[24px] bg-white/60 p-5 md:p-8">
+            <summary className="cursor-pointer text-lg font-semibold">Comparer avec une moto-école près de chez vous</summary>
+            <p className="mt-3 max-w-2xl text-carbone/75">Comparaison à périmètre égal : la formation seule, puis le temps et les trajets. Le calcul n'utilise que vos chiffres et le tarif de l'école.</p>
+            <div className="mt-6"><Comparator formationIndiana={prixFormationA2} /></div>
+          </details>
+        </Container>
+      </Etape>
+
+      {/* Preuves et disponibilités */}
+      <section className="py-16 md:py-24" aria-labelledby="confiance">
+        <Container>
+          <h2 id="confiance" className="max-w-3xl text-[clamp(2.2rem,5vw,3.8rem)]">Avec qui vous partez.</h2>
+          <div className="mt-8 grid gap-x-10 gap-y-6 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              { t: "Une école agréée", d: `Indiana Auto-Moto, au Havre. Agrément n° ${school.agrement}.` },
+              { t: "Certifiée Qualiopi", d: "Éligible au CPF sous conditions." },
+              { t: "Reconnue par les motards", d: "AFDM et Assurance Mutuelle des Motards." },
+              { t: "Une méthode suivie", d: "Programme REMC et vérification avant l'examen." },
+            ].map((x) => <div key={x.t}><h3 className="text-lg">{x.t}</h3><p className="mt-1 text-carbone/70">{x.d}</p></div>)}
+          </div>
+          <div className="mt-10"><Proofs /></div>
+          <p className="mt-6 text-sm text-carbone/55">{school.legalName}, {school.address.street}, {school.address.postalCode} {school.address.city}. <a href={school.phoneHref} className="underline">{school.phone}</a>. Informations mises à jour le {dateMaj}.</p>
+
+          <div className="mt-14 grid gap-8 rounded-[28px] bg-foret p-6 text-white md:p-10 lg:grid-cols-2">
+            <div>
+              <h3 className="text-2xl md:text-3xl">Quand partir&nbsp;?</h3>
+              {sessions.length === 0 ? (
+                <p className="mt-3 text-white/85">Les premières sessions sont en préparation : aucune date n'est encore ouverte. Dites-nous quand vous aimeriez partir, nous vous prévenons dès qu'une session correspond.</p>
+              ) : (
+                <ul className="mt-3 space-y-2">{sessions.map((s) => <li key={s.id}>Du {new Date(s.debut).toLocaleDateString("fr-FR", { day: "numeric", month: "long" })} au {new Date(s.fin).toLocaleDateString("fr-FR", { day: "numeric", month: "long" })} : {{ ouverte: "inscriptions ouvertes", "liste-attente": "liste d'attente", complet: "complet", "en-preparation": "en préparation" }[s.statut]}{s.places_restantes !== undefined ? `, ${s.places_restantes} place(s)` : ""}</li>)}</ul>
+              )}
+            </div>
+            <MiniLeadForm kind="Stage moto Normandie : alerte sessions" stage="Prospect" cta="Me prévenir" done="C'est noté, vous serez prévenu en priorité." fields={[{ name: "email", label: "E-mail", type: "email", required: true }, { name: "periode", label: "Période souhaitée", placeholder: "Ex. mai 2027" }]} />
           </div>
         </Container>
       </section>
 
-      {/* 7. Disponibilités */}
-      <section id="disponibilites" className="scroll-mt-28 bg-foret py-20 text-sable md:py-24">
+      {/* KM 197 : destination */}
+      <Etape id="devis" km={197} label="Mon devis" className="bg-sable py-16 md:py-24">
         <Container>
-          <h2 className="max-w-3xl text-[clamp(2rem,4.5vw,3.4rem)] text-white">Quand partir&nbsp;?</h2>
-          {sessions.length === 0 ? (
-            <div className="mt-8 grid gap-10 lg:grid-cols-2">
-              <p className="max-w-xl text-lg text-sable/85">
-                Les premières sessions sont en préparation : aucune date n'est encore ouverte. Indiquez la période qui vous arrange, nous vous prévenons dès qu'une session correspond.
-              </p>
-              <MiniLeadForm kind="Stage moto Normandie : alerte sessions" stage="Prospect" cta="Demander une disponibilité" done="C'est noté : vous serez prévenu en priorité." fields={[{ name: "email", label: "E-mail", type: "email", required: true }, { name: "periode", label: "Période souhaitée", placeholder: "Ex. mai 2027" }]} />
-            </div>
-          ) : (
-            <ul className="mt-8 grid gap-4 md:grid-cols-2">
-              {sessions.map((s) => (
-                <li key={s.id} className="rounded-2xl bg-white/10 p-6">
-                  <p className="text-xl font-semibold text-white">Du {new Date(s.debut).toLocaleDateString("fr-FR", { day: "numeric", month: "long" })} au {new Date(s.fin).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" })}</p>
-                  <p className="mt-1">{{ ouverte: "Inscriptions ouvertes", "liste-attente": "Liste d'attente", complet: "Complet", "en-preparation": "En préparation" }[s.statut]}{s.places_restantes !== undefined ? `, ${s.places_restantes} place(s) sur ${s.places_total}` : ""}{s.date_limite ? `, jusqu'au ${new Date(s.date_limite).toLocaleDateString("fr-FR")}` : ""}</p>
-                  {s.prerequis && <p className="mt-1 text-sm text-sable/75">Prérequis : {s.prerequis.join(", ")}</p>}
-                  {s.examen_info && <p className="mt-1 text-sm text-sable/75">{s.examen_info}</p>}
-                  {s.statut === "ouverte" && <a href="#devis" className="btn btn-sunset mt-4">Recevoir mon devis</a>}
-                </li>
-              ))}
-            </ul>
-          )}
+          <Borne km={197} lieu="Le Havre, vous y êtes" />
+          <h2 className="mt-5 max-w-3xl text-[clamp(2.2rem,5vw,3.8rem)]">Dernier tampon, votre devis.</h2>
+          <p className="mt-4 max-w-2xl text-lg text-carbone/75">Une minute, gratuit, sans engagement. On vous rappelle, puis vous recevez votre devis détaillé.</p>
+          <div className="mt-10"><QuickQuote prix={{ formation: prixFormationA2, code: prixCode }} /></div>
         </Container>
-      </section>
+      </Etape>
 
-      {/* 8. Confiance : qui organise, preuves */}
-      <section className="py-20 md:py-28" aria-labelledby="confiance">
-        <Container>
-          <h2 id="confiance" className="max-w-3xl text-[clamp(2rem,4.5vw,3.4rem)]">Qui vous forme&nbsp;?</h2>
-          <div className="mt-10 grid gap-10 lg:grid-cols-[1.2fr_1fr]">
-            <div className="grid gap-8 sm:grid-cols-2">
-              {[
-                { t: "Une école agréée", d: `Indiana Auto-Moto, au Havre. Agrément préfectoral n° ${school.agrement}.` },
-                { t: "Certifiée Qualiopi", d: "Organisme de formation certifié, éligible au CPF sous conditions." },
-                { t: "Reconnue par les motards", d: "Par l'AFDM et par l'Assurance Mutuelle des Motards." },
-                { t: "Une méthode suivie", d: "Programme national REMC et vérification de votre niveau avant l'examen." },
-              ].map((x) => (
-                <div key={x.t}>
-                  <h3 className="text-xl">{x.t}</h3>
-                  <p className="mt-1 text-carbone/70">{x.d}</p>
-                </div>
-              ))}
-            </div>
-            <div className="rounded-2xl bg-white p-6 md:p-8">
-              <p className="font-semibold">{school.legalName}</p>
-              <p className="text-carbone/70">{school.address.street}, {school.address.postalCode} {school.address.city}</p>
-              <p className="mt-2"><a href={school.phoneHref} className="font-semibold text-rouge">{school.phone}</a></p>
-              <p><a href={`mailto:${school.email}`} className="underline underline-offset-2">{school.email}</a></p>
-              <p className="mt-4 text-sm text-carbone/60">Formation dispensée par Indiana Auto-Moto. Les conditions d'organisation du séjour et d'annulation figurent dans votre devis et les conditions générales.</p>
-              <p className="mt-2 text-sm text-carbone/60">Informations mises à jour le {dateMaj}.</p>
-            </div>
-          </div>
-          <div className="mt-12"><Reviews /></div>
-        </Container>
-      </section>
-
-      {/* 9. Devis */}
-      <section id="devis" className="scroll-mt-28 bg-sable py-20 md:py-28" aria-labelledby="devis-titre">
-        <Container>
-          <h2 id="devis-titre" className="max-w-3xl text-[clamp(2rem,4.5vw,3.4rem)]">Recevoir mon devis personnalisé</h2>
-          <p className="mt-4 max-w-2xl text-lg text-carbone/75">Trois étapes, deux minutes. Gratuit et sans engagement.</p>
-          <div className="mt-10"><AdventureConfigurator prix={{ codeObtenu: prixFormationA2, codeAPreparer: prixFormationA2 + prixCode }} /></div>
-        </Container>
-      </section>
-
-      {/* 10. Questions */}
-      <section id="faq" className="scroll-mt-28 py-20 md:py-28" aria-labelledby="faq-titre">
+      <section id="faq" className="scroll-mt-28 py-16 md:py-24" aria-labelledby="faq-titre">
         <Container className="max-w-4xl">
-          <h2 id="faq-titre" className="text-[clamp(2rem,4.5vw,3.4rem)]">Vos questions</h2>
+          <h2 id="faq-titre" className="text-[clamp(2rem,4.5vw,3.2rem)]">Vos questions</h2>
           <div className="mt-8"><Accordion items={faq} /></div>
           <p className="mt-10 text-carbone/75">
             À lire aussi :{" "}
+            <Link href="/permis-moto-accelere/" className="font-semibold underline underline-offset-4">le permis moto accéléré</Link>,{" "}
             <Link href="/guides/permis-moto-en-deux-semaines/" className="font-semibold underline underline-offset-4">le permis moto en deux semaines</Link>,{" "}
             <Link href="/guides/prix-stage-permis-moto-hebergement/" className="font-semibold underline underline-offset-4">le prix d'un stage avec hébergement</Link>,{" "}
-            <Link href="/guides/permis-moto-depuis-paris/" className="font-semibold underline underline-offset-4">passer son permis moto en venant de Paris</Link>.
+            <Link href="/guides/permis-moto-depuis-paris/" className="font-semibold underline underline-offset-4">venir de Paris</Link>.
           </p>
+          <div className="mt-12 flex justify-center"><JourneyCta className="btn btn-rouge" /></div>
         </Container>
       </section>
     </div>
